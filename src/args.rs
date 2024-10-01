@@ -100,10 +100,10 @@ impl Settings {
 						last = CurrentKey::Dir;
 						continue;
 					}
-					else {
-						src.drain(..src.len() - rest.len());
-						dirs.push(OsString::from_vec(src));
-					}
+
+					// The value was included.
+					src.drain(..src.len() - rest.len());
+					dirs.push(OsString::from_vec(src));
 				},
 
 				// -j
@@ -113,6 +113,8 @@ impl Settings {
 						last = CurrentKey::Threads;
 						continue;
 					}
+
+					// The value was included.
 					set_threads(&mut threads, rest);
 				},
 

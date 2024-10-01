@@ -200,7 +200,7 @@ cargo build \
     --release
 ```
 
-Note that some of the image decoders — *\*\*cough\*\* JPEG XL \*\*cough\*\** — come with some extra build dependencies of their own. The specifics will vary by system, but you'll probably need `gcc`/`g++` (or Clang), NASM, and make/cmake.
+Note that some of the image decoders — *\*\*cough\*\* JPEG XL \*\*cough\*\** — come with some extra build dependencies of their own. The specifics will vary by system, but you'll most likely need `gcc`/`g++` (or Clang), Meson, NASM, Ninja, and make/cmake.
 
 While specifically designed for Linux systems, pxsum can probably be built for other 64-bit Unix platforms like Mac too.
 

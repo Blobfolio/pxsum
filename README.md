@@ -1,10 +1,10 @@
 # pxsum
 
-Pxsum is an x86-64 unix CLI tool for quickly calculating and verifying checksums corresponding to the _decoded pixel data_ within image files, making it possible to evaluate _visual_ equality independent of factors like format, encoding, and metadata.
+Pxsum is an x86-64 unix CLI tool for quickly calculating and verifying checksums corresponding to the _decoded pixel data_ within image files, making it possible to evaluate visual equality independent of factors like format, encoding, and metadata.
 
 | statler.png | statler.webp | waldorf.png |
 | ----------- | ------------ | ----------- |
-| <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.png" width="80" height="80" alt="Statler"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/waldorf.png" width="80" height="80" alt="Waldorf"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.webp" width="80" height="80" alt="Statler"></img> |
+| <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.png" width="80" height="80" alt="Statler"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.webp" width="80" height="80" alt="Statler"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/waldorf.png" width="80" height="80" alt="Waldorf"></img> |
 | `e20bf1e38053…` | `e20bf1e38053…` | `c0323c3e2bc4…` |
 
 One of these is not like the others…
@@ -23,7 +23,7 @@ To enable _true_ lossless comparisons, pass the `--strict` flag. In this mode, a
 
 | statler.png | statler.webp | waldorf.png |
 | ----------- | ------------ | ----------- |
-| <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.png" width="80" height="80" alt="Statler"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/waldorf.png" width="80" height="80" alt="Waldorf"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.webp" width="80" height="80" alt="Statler"></img> |
+| <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.png" width="80" height="80" alt="Statler"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/statler.webp" width="80" height="80" alt="Statler"></img> | <img src="https://github.com/Blobfolio/pxsum/raw/master/skel/assets/waldorf.png" width="80" height="80" alt="Waldorf"></img> |
 | `dde6d8e12be9…` | `2f62cb0941ce…` | `0b37c6af4734…` |
 
 Evidently WebP took some liberties with the negative space…
@@ -200,9 +200,9 @@ cargo build \
     --release
 ```
 
-Note that some of the image decoders — *cough JPEG XL cough* — come with some extra build dependencies of their own. The specifics will vary by system, but you'll at least need `gcc`/`g++`, NASM, and (probably) Make/Cmake.
+Note that some of the image decoders — *\*\*cough\*\* JPEG XL \*\*cough\*\** — come with some extra build dependencies of their own. The specifics will vary by system, but you'll probably need `gcc`/`g++` (or Clang), NASM, and make/cmake.
 
-Also note that while specifically designed for Linux systems, pxsum can probably be built for other 64-bit Unix platforms like Mac.
+While specifically designed for Linux systems, pxsum can probably be built for other 64-bit Unix platforms like Mac too.
 
 
 

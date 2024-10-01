@@ -1,5 +1,10 @@
 # pxsum
 
+[![ci](https://img.shields.io/github/actions/workflow/status/Blobfolio/pxsum/ci.yaml?style=flat-square&label=ci)](https://github.com/Blobfolio/pxsum/actions)
+[![deps.rs](https://deps.rs/repo/github/blobfolio/pxsum/status.svg?style=flat-square&label=deps.rs)](https://deps.rs/repo/github/blobfolio/pxsum)<br>
+[![license](https://img.shields.io/badge/license-wtfpl-ff1493?style=flat-square)](https://en.wikipedia.org/wiki/WTFPL)
+[![contributions welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square&label=contributions)](https://github.com/Blobfolio/pxsum/issues)
+
 Pxsum is an x86-64 unix CLI tool for quickly calculating and verifying checksums corresponding to the _decoded pixel data_ within image files, making it possible to evaluate visual equality independent of factors like format, encoding, and metadata.
 
 | statler.png | statler.webp | waldorf.png |

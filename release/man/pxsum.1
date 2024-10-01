@@ -1,0 +1,46 @@
+.TH "PXSUM" "1" "October 2024" "pxsum v0.1.0" "User Commands"
+.SH NAME
+pxsum \- Manual page for pxsum v0.1.0.
+.SH DESCRIPTION
+Calculate and verify checksums for decoded image pixel data.
+.SS USAGE:
+.TP
+pxsum [FLAGS] [OPTIONS] <PATH(s)…>
+.SS FLAGS:
+.TP
+\fB\-\-bench\fR
+Print the total execution time before exiting.
+.TP
+\fB\-c\fR, \fB\-\-check\fR
+Read existing pxsum/path pairs from FILE(S) and check if they still ring true. This takes priority over crunch\-specific options, like \-d/\-\-dir.
+.TP
+\fB\-g\fR, \fB\-\-group\-by\-checksum\fR
+Crunch as usual, but group the results by checksum. Note this will delay output until the end of the run.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help information and exit.
+.TP
+\fB\-\-no\-warnings\fR
+Suppress warnings related to image decoding when crunching anew, and malformed check manifest lines when \-c/\-\-check.
+.TP
+\fB\-\-only\-dupes\fR
+Same as \-g/\-\-group\-by\-checksum, but only checksums with two or more matching images will be printed.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Suppress OK messages in \-c/\-\-check mode.
+.TP
+\fB\-\-strict\fR
+Include color data from invisible pixels in checksum calculations.
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version information and exit.
+.SS OPTIONS:
+.TP
+\fB\-d\fR, \fB\-\-dir\fR <DIR>
+Recursively search <DIR> for image files and pxsum them (along with any other FILE(S)). Has no effect when \-c/\-\-check.
+.TP
+\fB\-j\fR <NUM>
+Limit parallelization to this many threads (instead of giving each logical core its own image to work on). If negative, the value will be subtracted from the total number of logical cores.
+.SS <PATH(S)…>:
+.TP
+One or more image and/or directory paths.

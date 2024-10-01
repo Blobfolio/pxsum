@@ -1,0 +1,134 @@
+[package]
+name = "pxsum"
+version = "0.1.0"
+license = "WTFPL"
+authors = ["Josh Stoik <josh@blobfolio.com>"]
+edition = "2021"
+description = "Calculate and verify checksums for decoded image pixel data."
+readme = "README.md"
+publish = false
+
+[package.metadata.deb]
+maintainer = "Josh Stoik <hello@blobfolio.com>"
+copyright = "2024, Blobfolio, LLC <hello@blobfolio.com>"
+license-file = ["./LICENSE", "0"]
+extended-description = ""
+revision = "1"
+depends = "$auto"
+section = "graphics"
+assets = [
+    ["./target/release/pxsum", "usr/bin/", "755"],
+    ["./release/completions/pxsum.bash", "etc/bash_completion.d/", "644"],
+    ["./release/man/pxsum.1.gz", "usr/share/man/man1/", "644"],
+]
+
+[package.metadata.bashman]
+name = "pxsum"
+bash-dir = "./release/completions"
+man-dir = "./release/man"
+credits-dir = "./"
+
+[[package.metadata.bashman.switches]]
+long = "--bench"
+description = "Print the total execution time before exiting."
+
+[[package.metadata.bashman.switches]]
+short = "-c"
+long = "--check"
+description = "Read existing pxsum/path pairs from FILE(S) and check if they still ring true. This takes priority over crunch-specific options, like -d/--dir."
+
+[[package.metadata.bashman.switches]]
+short = "-g"
+long = "--group-by-checksum"
+description = "Crunch as usual, but group the results by checksum. Note this will delay output until the end of the run."
+
+[[package.metadata.bashman.switches]]
+short = "-h"
+long = "--help"
+description = "Print help information and exit."
+
+[[package.metadata.bashman.switches]]
+long = "--no-warnings"
+description = "Suppress warnings related to image decoding when crunching anew, and malformed check manifest lines when -c/--check."
+
+[[package.metadata.bashman.switches]]
+long = "--only-dupes"
+description = "Same as -g/--group-by-checksum, but only checksums with two or more matching images will be printed."
+
+[[package.metadata.bashman.switches]]
+short = "-q"
+long = "--quiet"
+description = "Suppress OK messages in -c/--check mode."
+
+[[package.metadata.bashman.switches]]
+long = "--strict"
+description = "Include color data from invisible pixels in checksum calculations."
+
+[[package.metadata.bashman.switches]]
+short = "-V"
+long = "--version"
+description = "Print version information and exit."
+
+[[package.metadata.bashman.options]]
+short = "-d"
+long = "--dir"
+label = "<DIR>"
+description = "Recursively search <DIR> for image files and pxsum them (along with any other FILE(S)). Has no effect when -c/--check."
+path = true
+duplicate = true
+
+[[package.metadata.bashman.options]]
+short = "-j"
+label = "<NUM>"
+description = "Limit parallelization to this many threads (instead of giving each logical core its own image to work on). If negative, the value will be subtracted from the total number of logical cores."
+path = false
+
+[[package.metadata.bashman.arguments]]
+label = "<PATH(s)…>"
+description = "One or more image and/or directory paths."
+
+[dependencies]
+blake3 = "=1.5.4"
+crossbeam-channel = "=0.5.*"
+dactyl = "0.7.*"
+fyi_msg = "0.14.*"
+trimothy = "0.3.*"
+walkdir = "=2.5.*"
+
+[dependencies.faster-hex]
+version = "0.10.*"
+default-features = false
+features = [ "std" ]
+
+[dependencies.image]
+version = "0.25.*"
+default-features = false
+features = [ "bmp", "gif", "ico", "jpeg", "png", "tiff", "webp" ]
+
+[dependencies.jpeg2k]
+version = "=0.9.1"
+default-features = false
+features = [ "image", "openjpeg-sys"]
+
+[dependencies.jpegxl-rs]
+version = "=0.11.0"
+default-features = false
+features = [ "image", "vendored" ]
+
+[dependencies.libavif]
+version = "=0.14.0"
+default-features = false
+features = [ "codec-dav1d" ]
+
+[build-dependencies]
+dactyl = "0.7.*"
+
+[build-dependencies.image]
+version = "0.25.*"
+default-features = false
+features = [ "bmp", "gif", "ico", "jpeg", "png", "tiff", "webp" ]
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

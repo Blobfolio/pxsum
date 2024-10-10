@@ -91,7 +91,7 @@ description = "One or more image and/or directory paths."
 blake3 = "=1.5.4"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.7.*"
-fyi_msg = "0.14.*"
+fyi_msg = "1.1.*"
 trimothy = "0.3.*"
 walkdir = "=2.5.*"
 

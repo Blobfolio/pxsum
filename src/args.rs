@@ -79,8 +79,14 @@ impl Settings {
 
 		// Finish up with some path work, unless -c/--check got set.
 		if 0 == flags & Self::CHECK {
-			// Go ahead and drop paths that don't have a proper extension.
-			paths.retain(|p| crate::check_extension(p.as_bytes()));
+			// Note whether we're empty to start with.
+			let empty =
+				if paths.is_empty() { true }
+				else {
+					// Go ahead and drop paths without proper extensions.
+					paths.retain(|p| crate::check_extension(p.as_bytes()));
+					false
+				};
 
 			// And crawl any directories requested.
 			for d in dirs {
@@ -93,6 +99,9 @@ impl Settings {
 					}
 				}
 			}
+
+			// If we weren't empty before but are now, return an error.
+			if ! empty && paths.is_empty() { return Err(PxsumError::Noop); }
 		}
 
 		// Path touch-ups.

@@ -2,6 +2,7 @@
 # pxsum: Errors.
 */
 
+use argyle::stream::ArgyleError;
 use image::error::ImageError;
 use std::{
 	error::Error,
@@ -14,8 +15,7 @@ use std::{
 /// # Help Text.
 ///
 /// It's long, but at least it's static!
-const HELP: &str = concat!(
-	r"
+const HELP: &str = concat!(r"
 ,_     _
  |\\_,-~/
  / _  _ |    ,--.
@@ -74,8 +74,7 @@ EXIT CODES:
     1: Something blew up!
     2: No checksum/path pairs were outputted.
     3: One or more images failed to re-verify.
-"#
-);
+"#);
 
 
 
@@ -86,6 +85,9 @@ EXIT CODES:
 /// error, a warning of some sort (that may or may not be used), or an abort
 /// hint for "special" screens like Help and Version.
 pub(super) enum PxsumError {
+	/// # Argue Passthrough.
+	Argue(ArgyleError),
+
 	/// # Image decode failed.
 	Decode,
 
@@ -140,12 +142,13 @@ pub(super) enum PxsumError {
 
 impl fmt::Display for PxsumError {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		let string = match self {
+		let s = match self {
 			Self::Failed(n) => return write!(
 				f,
 				"{n} computed checksum{} did NOT match",
 				if n.get() ==1 { "" } else { "s" }
 			),
+			Self::Argue(e) => e.as_str(),
 			Self::Decode => "Decoding failed.",
 			Self::JobServer => "Job server choked!",
 			Self::LineDecode => "Invalid pxsum line.",
@@ -159,11 +162,16 @@ impl fmt::Display for PxsumError {
 			Self::Stdin => "Unable to read STDIN."
 		};
 
-		f.write_str(string)
+		f.write_str(s)
 	}
 }
 
 impl Error for PxsumError {}
+
+impl From<ArgyleError> for PxsumError {
+	#[inline]
+	fn from(src: ArgyleError) -> Self { Self::Argue(src) }
+}
 
 impl From<ImageError> for PxsumError {
 	#[inline]

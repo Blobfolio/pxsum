@@ -88,6 +88,7 @@ label = "<PATH(s)…>"
 description = "One or more image and/or directory paths."
 
 [dependencies]
+argyle = "0.9.*"
 blake3 = "=1.5.4"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.7.*"

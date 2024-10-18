@@ -37,7 +37,7 @@ _basher___pxsum() {
 		return 0
 	fi
 	case "${prev}" in
-		-d|--dir)
+		--dir|-d)
 			if [ -z "$( declare -f _filedir )" ]; then
 				COMPREPLY=( $( compgen -f "${cur}" ) )
 			else

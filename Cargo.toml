@@ -88,7 +88,7 @@ label = "<PATH(s)…>"
 description = "One or more image and/or directory paths."
 
 [dependencies]
-argyle = "0.9.*"
+argyle = "0.10.*"
 blake3 = "=1.5.4"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.7.*"
@@ -122,6 +122,7 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
+argyle = "0.10.*"
 dactyl = "0.7.*"
 
 [build-dependencies.image]

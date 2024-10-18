@@ -2,7 +2,6 @@
 # pxsum: Errors.
 */
 
-use argyle::stream::ArgyleError;
 use image::error::ImageError;
 use std::{
 	error::Error,
@@ -85,9 +84,6 @@ EXIT CODES:
 /// error, a warning of some sort (that may or may not be used), or an abort
 /// hint for "special" screens like Help and Version.
 pub(super) enum PxsumError {
-	/// # Argue Passthrough.
-	Argue(ArgyleError),
-
 	/// # Image decode failed.
 	Decode,
 
@@ -148,7 +144,6 @@ impl fmt::Display for PxsumError {
 				"{n} computed checksum{} did NOT match",
 				if n.get() ==1 { "" } else { "s" }
 			),
-			Self::Argue(e) => e.as_str(),
 			Self::Decode => "Decoding failed.",
 			Self::JobServer => "Job server choked!",
 			Self::LineDecode => "Invalid pxsum line.",
@@ -167,11 +162,6 @@ impl fmt::Display for PxsumError {
 }
 
 impl Error for PxsumError {}
-
-impl From<ArgyleError> for PxsumError {
-	#[inline]
-	fn from(src: ArgyleError) -> Self { Self::Argue(src) }
-}
 
 impl From<ImageError> for PxsumError {
 	#[inline]

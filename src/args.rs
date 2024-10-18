@@ -2,7 +2,7 @@
 # pxsum: Cli Arguments.
 */
 
-use argyle::stream::Argument;
+use argyle::Argument;
 use crate::PxsumError;
 use dactyl::traits::BytesToUnsigned;
 use std::{
@@ -30,22 +30,8 @@ pub(super) struct Settings {
 impl Settings {
 	/// # From CLI Arguments.
 	pub(super) fn new() -> Result<(Self, Vec<OsString>), PxsumError> {
-		let args = argyle::stream::args()
-			.with_switches([
-				"--bench",
-				"-c", "--check",
-				"-g", "--group-by-checksum",
-				"-h", "--help",
-				"--no-warnings",
-				"--only-dupes",
-				"-q", "--quiet",
-				"--strict",
-				"-V", "--version",
-			])?
-			.with_options([
-				"-d", "--dir",
-				"-j"
-			])?;
+		let args = argyle::args()
+			.with_keywords(include!(concat!(env!("OUT_DIR"), "/argyle.rs")));
 
 		let mut flags = Self::PRINT_VALID | Self::PRINT_WARNINGS;
 		let mut threads = std::thread::available_parallelism().unwrap_or(NonZeroUsize::MIN);

@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.1.0"
+version = "0.1.1"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2021"
@@ -88,10 +88,11 @@ label = "<PATH(s)…>"
 description = "One or more image and/or directory paths."
 
 [dependencies]
+argyle = "0.10.*"
 blake3 = "=1.5.4"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.7.*"
-fyi_msg = "0.14.*"
+fyi_msg = "1.1.*"
 trimothy = "0.3.*"
 walkdir = "=2.5.*"
 
@@ -111,7 +112,7 @@ default-features = false
 features = [ "image", "openjpeg-sys"]
 
 [dependencies.jpegxl-rs]
-version = "=0.11.0"
+version = "=0.11.1"
 default-features = false
 features = [ "image", "vendored" ]
 
@@ -121,6 +122,7 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
+argyle = "0.10.*"
 dactyl = "0.7.*"
 
 [build-dependencies.image]

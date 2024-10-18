@@ -2,17 +2,46 @@
 # pxsum: Build Script
 */
 
+use argyle::KeyWordsBuilder;
 use dactyl::NiceU32;
 use image::ImageFormat;
 use std::{
 	collections::BTreeSet,
 	io::Write,
+	path::PathBuf,
 };
 
 
 
-/// # Pre-Compute Extensions.
+/// # Pre-Compute CLI keys and Extensions.
 pub fn main() {
+	build_cli();
+	build_ext();
+}
+
+/// # Build CLI Keys.
+fn build_cli() {
+	let mut builder = KeyWordsBuilder::default();
+	builder.push_keys([
+		"--bench",
+		"-c", "--check",
+		"-g", "--group-by-checksum",
+		"-h", "--help",
+		"--no-warnings",
+		"--only-dupes",
+		"-q", "--quiet",
+		"--strict",
+		"-V", "--version",
+	]);
+	builder.push_keys_with_values([
+		"-d", "--dir",
+		"-j"
+	]);
+	builder.save(out_path("argyle.rs"));
+}
+
+/// # Build Extensions.
+fn build_ext() {
 	// Collect the supported formats.
 	let formats: Vec<ImageFormat> = ImageFormat::all()
 		.filter(|f| f.can_read() && f.reading_enabled())
@@ -85,11 +114,16 @@ const fn check_extension(bytes: &[u8]) -> bool {{
 			.join(" | "),
 	);
 
-	let out_path = std::fs::canonicalize(std::env::var("OUT_DIR").expect("Missing OUT_DIR."))
-		.expect("Missing OUT_DIR.")
-		.join("pxsum-ext.rs");
-
-	std::fs::File::create(out_path)
+	std::fs::File::create(out_path("pxsum-ext.rs"))
 		.and_then(|mut f| f.write_all(out.as_bytes()).and_then(|_| f.flush()))
 		.expect("Unable to write file.");
+}
+
+/// # Output Path.
+///
+/// Append the sub-path to OUT_DIR and return it.
+fn out_path(stub: &str) -> PathBuf {
+	std::fs::canonicalize(std::env::var("OUT_DIR").expect("Missing OUT_DIR."))
+		.expect("Missing OUT_DIR.")
+		.join(stub)
 }

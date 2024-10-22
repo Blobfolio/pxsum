@@ -15,6 +15,8 @@ use std::{
 
 /// # Pre-Compute CLI keys and Extensions.
 pub fn main() {
+	println!("cargo:rerun-if-env-changed=CARGO_PKG_VERSION");
+
 	build_cli();
 	build_ext();
 }

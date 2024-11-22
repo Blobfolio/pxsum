@@ -135,9 +135,9 @@ fn main() {
 	let now = Instant::now();
 	let mut bench = false;
 
-	// The _main() method does all the hard work, but some responses warrant
+	// The main__() method does all the hard work, but some responses warrant
 	// additional output.
-	match _main(&mut bench) {
+	match main__(&mut bench) {
 		Ok(()) => if bench { print_time(now); },
 		Err(e @ (PxsumError::PrintHelp | PxsumError::PrintVersion)) => { println!("{e}"); },
 		Err(e) => {
@@ -161,7 +161,7 @@ fn main() {
 
 #[inline]
 /// # Actual Main.
-fn _main(print_time: &mut bool) -> Result<(), PxsumError> {
+fn main__(print_time: &mut bool) -> Result<(), PxsumError> {
 	// Parse CLI arguments.
 	let (settings, paths) = Settings::new()?;
 
@@ -378,6 +378,7 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 
 				// Well that didn't work!
 				if ! read {
+					// TODO: replace with p.display() when stable
 					Msg::warning(format!(
 						"Invalid pxsum manifest.\n         \x1b[2m{}\x1b[0m",
 						p.to_string_lossy(),

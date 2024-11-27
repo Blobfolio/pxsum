@@ -88,7 +88,7 @@ description = "One or more image and/or directory paths."
 
 [dependencies]
 argyle = "0.10.*"
-blake3 = "=1.5.4"
+blake3 = "=1.5.5"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.7.*"
 fyi_msg = "1.2.*"

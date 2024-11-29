@@ -92,7 +92,7 @@ blake3 = "=1.5.5"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.7.*"
 fyi_msg = "1.3.*"
-trimothy = "0.5.*"
+trimothy = "0.6.*"
 walkdir = "=2.5.*"
 
 [dependencies.faster-hex]

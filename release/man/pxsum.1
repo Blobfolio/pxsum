@@ -1,6 +1,6 @@
-.TH "PXSUM" "1" "October 2024" "pxsum v0.1.1" "User Commands"
+.TH "PXSUM" "1" "November 2024" "pxsum v0.1.2" "User Commands"
 .SH NAME
-PXSUM \- Manual page for pxsum v0.1.1.
+PXSUM \- Manual page for pxsum v0.1.2.
 .SH DESCRIPTION
 Calculate and verify checksums for decoded image pixel data.
 .SS USAGE:
@@ -41,6 +41,7 @@ Recursively search <DIR> for image files and pxsum them (along with any other FI
 .TP
 \fB\-j\fR <NUM>
 Limit parallelization to this many threads (instead of giving each logical core its own image to work on). If negative, the value will be subtracted from the total number of logical cores.
-.SS <PATH(S)…>:
+.SS TRAILING:
 .TP
+\fB<PATH(s)…>\fR
 One or more image and/or directory paths.

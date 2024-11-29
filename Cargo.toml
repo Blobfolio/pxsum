@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.1.1"
+version = "0.1.2"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2021"
@@ -9,7 +9,7 @@ readme = "README.md"
 publish = false
 
 [package.metadata.deb]
-maintainer = "Josh Stoik <hello@blobfolio.com>"
+maintainer = "Josh Stoik <josh@blobfolio.com>"
 copyright = "2024, Blobfolio, LLC <hello@blobfolio.com>"
 license-file = ["./LICENSE", "0"]
 extended-description = ""
@@ -26,7 +26,6 @@ assets = [
 name = "pxsum"
 bash-dir = "./release/completions"
 man-dir = "./release/man"
-credits-dir = "./"
 
 [[package.metadata.bashman.switches]]
 long = "--bench"
@@ -89,11 +88,11 @@ description = "One or more image and/or directory paths."
 
 [dependencies]
 argyle = "0.10.*"
-blake3 = "=1.5.4"
+blake3 = "=1.5.5"
 crossbeam-channel = "=0.5.*"
-dactyl = "0.7.*"
-fyi_msg = "1.1.*"
-trimothy = "0.3.*"
+dactyl = "0.8.*"
+fyi_msg = "1.3.*"
+trimothy = "0.6.*"
 walkdir = "=2.5.*"
 
 [dependencies.faster-hex]
@@ -112,7 +111,7 @@ default-features = false
 features = [ "image", "openjpeg-sys"]
 
 [dependencies.jpegxl-rs]
-version = "=0.11.1"
+version = "=0.11.2"
 default-features = false
 features = [ "image", "vendored" ]
 
@@ -123,7 +122,7 @@ features = [ "codec-dav1d" ]
 
 [build-dependencies]
 argyle = "0.10.*"
-dactyl = "0.7.*"
+dactyl = "0.8.*"
 
 [build-dependencies.image]
 version = "0.25.*"

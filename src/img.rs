@@ -10,7 +10,10 @@ use image::{
 	DynamicImage,
 	ImageFormat,
 };
-use std::num::Wrapping;
+use std::num::{
+	NonZeroU32,
+	Wrapping,
+};
 
 
 
@@ -170,6 +173,12 @@ pub(super) struct PxImage {
 
 	/// # No Alpha Data (original type).
 	no_alpha: bool,
+
+	/// # Image Width.
+	width: NonZeroU32,
+
+	/// # Image Height.
+	height: NonZeroU32,
 }
 
 impl PxImage {
@@ -184,6 +193,10 @@ impl PxImage {
 	pub(super) fn new(src: &[u8], format: PxKind) -> Result<Self, PxsumError> {
 		// Decode the image as-is.
 		let img = format.decode(src)?;
+
+		// Get width and height.
+		let width = NonZeroU32::new(img.width()).ok_or(PxsumError::Dimensions)?;
+		let height = NonZeroU32::new(img.height()).ok_or(PxsumError::Dimensions)?;
 
 		// If we know there's no alpha channel in the original, make a note of
 		// it as it can save us some time later on.
@@ -201,7 +214,7 @@ impl PxImage {
 
 		// Check the counts, but we should be good here.
 		if len == 0 { Err(PxsumError::NoData) }
-		else if len % 4 == 0 { Ok(Self { buf, no_alpha }) }
+		else if len % 4 == 0 { Ok(Self { buf, no_alpha, width, height }) }
 		else { Err(PxsumError::Decode) }
 	}
 
@@ -210,7 +223,7 @@ impl PxImage {
 	/// Calculate and return a checksum of the pixel data.
 	pub(super) fn into_checksum(self, strict: bool) -> [u8; 32] {
 		// Destructure.
-		let Self { mut buf, no_alpha } = self;
+		let Self { mut buf, no_alpha, width, height } = self;
 
 		// For loose comparisons, replace invisible pixels with their index so
 		// color drift won't affect the checksum.
@@ -226,6 +239,8 @@ impl PxImage {
 
 		// Hash the pixel data!
 		let mut hasher = blake3::Hasher::new();
+		hasher.update(width.get().to_le_bytes().as_slice());
+		hasher.update(height.get().to_le_bytes().as_slice());
 		hasher.update(buf.as_slice());
 		let mut chk = <[u8; 32]>::from(hasher.finalize());
 

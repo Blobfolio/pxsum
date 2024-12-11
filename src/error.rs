@@ -15,7 +15,7 @@ use std::{
 ///
 /// It's long, but at least it's static!
 const HELP: &str = concat!(r"
-,_     _
+ ,_     _
  |\\_,-~/
  / _  _ |    ,--.
 (  @  @ )   / ,-'
@@ -87,6 +87,9 @@ pub(super) enum PxsumError {
 	/// # Image decode failed.
 	Decode,
 
+	/// # Invalid Dimensions.
+	Dimensions,
+
 	/// # Job server failed.
 	///
 	/// This would trigger in the event a `tx.send()` request fails, but that
@@ -145,6 +148,7 @@ impl fmt::Display for PxsumError {
 				if n.get() ==1 { "" } else { "s" }
 			),
 			Self::Decode => "Decoding failed.",
+			Self::Dimensions => "Invalid image dimensions.",
 			Self::JobServer => "Job server choked!",
 			Self::LineDecode => "Invalid pxsum line.",
 			Self::NoData => "Empty input.",

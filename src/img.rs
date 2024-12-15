@@ -10,9 +10,12 @@ use image::{
 	DynamicImage,
 	ImageFormat,
 };
-use std::num::{
-	NonZeroU32,
-	Wrapping,
+use std::{
+	io::Cursor,
+	num::{
+		NonZeroU32,
+		Wrapping,
+	},
 };
 
 
@@ -75,7 +78,7 @@ impl TryFrom<ImageFormat> for PxKind {
 impl PxKind {
 	/// # Decode.
 	fn decode(self, src: &[u8]) -> Result<DynamicImage, PxsumError> {
-		use jpegxl_rs::image::ToDynamic;
+		use image::{AnimationDecoder, codecs};
 
 		#[cold]
 		/// # Decode AVIF.
@@ -107,6 +110,7 @@ impl PxKind {
 		///
 		/// Not a popular format, hence cold.
 		fn decode_jpegxl(src: &[u8]) -> Result<DynamicImage, PxsumError> {
+			use jpegxl_rs::image::ToDynamic;
 			jpegxl_rs::decoder_builder()
 				.build()
 				.and_then(|dec| dec.decode_to_image(src))
@@ -118,12 +122,28 @@ impl PxKind {
 		// Most decoding is handled by the image crate.
 		let fmt = match self {
 			Self::Bmp => ImageFormat::Bmp,
-			Self::Gif => ImageFormat::Gif,
 			Self::Ico => ImageFormat::Ico,
 			Self::Jpeg => ImageFormat::Jpeg,
-			Self::Png => ImageFormat::Png,
 			Self::Tiff => ImageFormat::Tiff,
-			Self::WebP => ImageFormat::WebP,
+
+			// Check for animation.
+			Self::Gif =>
+				// This decoder lacks a built-in method for animation-checking
+				// so we have to decode and count the frames instead. Yuck!
+				if codecs::gif::GifDecoder::new(Cursor::new(src))?.into_frames().take(2).count() == 1 {
+					ImageFormat::Gif
+				}
+				else { return Err(PxsumError::Animation); },
+			Self::Png =>
+				if codecs::png::PngDecoder::new(Cursor::new(src)).and_then(|p| p.is_apng())? {
+					return Err(PxsumError::Animation);
+				}
+				else { ImageFormat::Png },
+			Self::WebP =>
+				if codecs::webp::WebPDecoder::new(Cursor::new(src))?.has_animation() {
+					return Err(PxsumError::Animation);
+				}
+				else { ImageFormat::WebP },
 
 			// The image crate doesn't _really_ support AVIF yet, so we need to
 			// step in for these.
@@ -136,7 +156,7 @@ impl PxKind {
 			Self::JpegXl => return decode_jpegxl(src),
 		};
 
-		Ok(image::load_from_memory_with_format(src, fmt)?)
+		image::load_from_memory_with_format(src, fmt).map_err(Into::into)
 	}
 
 	/// # Guess Format.
@@ -332,6 +352,24 @@ mod test {
 				kind,
 				"Wrong type guessed for {path}!",
 			);
+		}
+	}
+
+	#[test]
+	fn t_animation() {
+		// Make sure these all fail.
+		for (path, fmt) in [
+			("skel/assets/flyfuk.gif", PxKind::Gif),
+			("skel/assets/flyfuk.png", PxKind::Png),
+			("skel/assets/flyfuk.webp", PxKind::WebP),
+		] {
+			let Ok(raw) = std::fs::read(path) else {
+				panic!("Unable to open {path}.");
+			};
+			match PxImage::new(&raw, fmt) {
+				Ok(_) => panic!("Animation should fail: {path}"),
+				Err(e) => assert_eq!(e, PxsumError::Animation),
+			}
 		}
 	}
 }

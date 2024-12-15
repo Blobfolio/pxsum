@@ -84,6 +84,9 @@ EXIT CODES:
 /// error, a warning of some sort (that may or may not be used), or an abort
 /// hint for "special" screens like Help and Version.
 pub(super) enum PxsumError {
+	/// # Animation.
+	Animation,
+
 	/// # Image decode failed.
 	Decode,
 
@@ -147,6 +150,7 @@ impl fmt::Display for PxsumError {
 				"{n} computed checksum{} did NOT match",
 				if n.get() ==1 { "" } else { "s" }
 			),
+			Self::Animation => "Image contains animation.",
 			Self::Decode => "Decoding failed.",
 			Self::Dimensions => "Invalid image dimensions.",
 			Self::JobServer => "Job server choked!",

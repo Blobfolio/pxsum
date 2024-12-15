@@ -37,7 +37,7 @@ Evidently WebP took some liberties with the negative space…
 
 ## Supported Image Formats
 
-Pxsum can detect and decode (most) images in the following formats:
+Pxsum can detect and decode (most) single-frame images in the following formats:
 
 * AVIF
 * BMP
@@ -49,6 +49,8 @@ Pxsum can detect and decode (most) images in the following formats:
 * PNG
 * TIFF
 * WebP
+
+Animated images are not supported.
 
 (If you'd like to see support for something else, just open an [issue](https://github.com/Blobfolio/pxsum/issues).)
 

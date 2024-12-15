@@ -9,6 +9,7 @@ use crate::{
 use image::{
 	DynamicImage,
 	ImageFormat,
+	ImageReader,
 };
 use std::{
 	io::Cursor,
@@ -164,7 +165,10 @@ impl PxKind {
 			Self::JpegXl => return decode_jpegxl(src),
 		};
 
-		image::load_from_memory_with_format(src, fmt).map_err(Into::into)
+		// Let the image crate sort it out.
+		let mut dec = ImageReader::with_format(Cursor::new(src), fmt);
+		dec.no_limits();
+		dec.decode().map_err(Into::into)
 	}
 
 	/// # Guess Format.

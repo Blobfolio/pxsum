@@ -83,8 +83,8 @@ description = "Limit parallelization to this many threads (instead of giving eac
 path = false
 
 [[package.metadata.bashman.arguments]]
-label = "<PATH(s)…>"
-description = "One or more image and/or directory paths."
+label = "<FILE(s)…>"
+description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
 argyle = "0.10.*"

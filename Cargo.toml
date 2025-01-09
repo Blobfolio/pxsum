@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.2.0"
+version = "0.3.0"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2021"
@@ -10,7 +10,7 @@ publish = false
 
 [package.metadata.deb]
 maintainer = "Josh Stoik <josh@blobfolio.com>"
-copyright = "2024, Blobfolio, LLC <hello@blobfolio.com>"
+copyright = "2025, Blobfolio, LLC <hello@blobfolio.com>"
 license-file = ["./LICENSE", "0"]
 extended-description = ""
 revision = "1"
@@ -83,15 +83,15 @@ description = "Limit parallelization to this many threads (instead of giving eac
 path = false
 
 [[package.metadata.bashman.arguments]]
-label = "<PATH(s)…>"
-description = "One or more image and/or directory paths."
+label = "<FILE(s)…>"
+description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
 argyle = "0.10.*"
 blake3 = "=1.5.5"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.9.*"
-fyi_msg = "1.4.*"
+fyi_msg = "1.5.*"
 trimothy = "0.6.*"
 walkdir = "=2.5.*"
 

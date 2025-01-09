@@ -215,7 +215,7 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 						ANY.store(true, Relaxed);
 						println!("{chk}");
 					},
-				Err(PxsumError::Path | PxsumError::NoData) => {}, // Silently ignore.
+				Err(PxsumError::Animation | PxsumError::Path | PxsumError::NoData) => {}, // Silently ignore.
 				Err(_) => if print_warnings {
 					let mut src = Cow::Borrowed(chk.src());
 					if src.is_empty() { src = p.to_string_lossy(); }

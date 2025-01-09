@@ -9,11 +9,23 @@ use crate::{
 use image::{
 	DynamicImage,
 	ImageFormat,
+	ImageReader,
 };
-use std::num::{
-	NonZeroU32,
-	Wrapping,
+use std::{
+	io::Cursor,
+	num::{
+		NonZeroU32,
+		NonZeroUsize,
+		Wrapping,
+	},
 };
+
+
+
+/// # RGBA Pixel Size.
+///
+/// Each channel is one byte, four in total.
+const RGBA_SIZE: NonZeroUsize = NonZeroUsize::new(4).unwrap();
 
 
 
@@ -75,7 +87,7 @@ impl TryFrom<ImageFormat> for PxKind {
 impl PxKind {
 	/// # Decode.
 	fn decode(self, src: &[u8]) -> Result<DynamicImage, PxsumError> {
-		use jpegxl_rs::image::ToDynamic;
+		use image::{AnimationDecoder, codecs};
 
 		#[cold]
 		/// # Decode AVIF.
@@ -107,6 +119,7 @@ impl PxKind {
 		///
 		/// Not a popular format, hence cold.
 		fn decode_jpegxl(src: &[u8]) -> Result<DynamicImage, PxsumError> {
+			use jpegxl_rs::image::ToDynamic;
 			jpegxl_rs::decoder_builder()
 				.build()
 				.and_then(|dec| dec.decode_to_image(src))
@@ -118,12 +131,28 @@ impl PxKind {
 		// Most decoding is handled by the image crate.
 		let fmt = match self {
 			Self::Bmp => ImageFormat::Bmp,
-			Self::Gif => ImageFormat::Gif,
 			Self::Ico => ImageFormat::Ico,
 			Self::Jpeg => ImageFormat::Jpeg,
-			Self::Png => ImageFormat::Png,
 			Self::Tiff => ImageFormat::Tiff,
-			Self::WebP => ImageFormat::WebP,
+
+			// Check for animation.
+			Self::Gif =>
+				// This decoder lacks a built-in method for animation-checking
+				// so we have to decode and count the frames instead. Yuck!
+				if codecs::gif::GifDecoder::new(Cursor::new(src))?.into_frames().take(2).count() == 1 {
+					ImageFormat::Gif
+				}
+				else { return Err(PxsumError::Animation); },
+			Self::Png =>
+				if codecs::png::PngDecoder::new(Cursor::new(src)).and_then(|p| p.is_apng())? {
+					return Err(PxsumError::Animation);
+				}
+				else { ImageFormat::Png },
+			Self::WebP =>
+				if codecs::webp::WebPDecoder::new(Cursor::new(src))?.has_animation() {
+					return Err(PxsumError::Animation);
+				}
+				else { ImageFormat::WebP },
 
 			// The image crate doesn't _really_ support AVIF yet, so we need to
 			// step in for these.
@@ -136,7 +165,10 @@ impl PxKind {
 			Self::JpegXl => return decode_jpegxl(src),
 		};
 
-		Ok(image::load_from_memory_with_format(src, fmt)?)
+		// Let the image crate sort it out.
+		let mut dec = ImageReader::with_format(Cursor::new(src), fmt);
+		dec.no_limits();
+		dec.decode().map_err(Into::into)
 	}
 
 	/// # Guess Format.
@@ -198,6 +230,16 @@ impl PxImage {
 		let width = NonZeroU32::new(img.width()).ok_or(PxsumError::Dimensions)?;
 		let height = NonZeroU32::new(img.height()).ok_or(PxsumError::Dimensions)?;
 
+		// Figure out how many bytes the RGBA pixel data _should_ take up
+		// given the dimensions.
+		let expected_len: NonZeroUsize = {
+			let w = NonZeroUsize::try_from(width).map_err(|_| PxsumError::Dimensions)?;
+			let h = NonZeroUsize::try_from(height).map_err(|_| PxsumError::Dimensions)?;
+			w.checked_mul(h)
+				.and_then(|r| r.checked_mul(RGBA_SIZE))
+				.ok_or(PxsumError::Dimensions)?
+		};
+
 		// If we know there's no alpha channel in the original, make a note of
 		// it as it can save us some time later on.
 		let no_alpha = matches!(img,
@@ -212,9 +254,11 @@ impl PxImage {
 		let buf: Vec<u8> = img.into_rgba8().into_vec();
 		let len = buf.len();
 
-		// Check the counts, but we should be good here.
-		if len == 0 { Err(PxsumError::NoData) }
-		else if len % 4 == 0 { Ok(Self { buf, no_alpha, width, height }) }
+		// Check the counts, but we're probably good if we made it this far.
+		if len == expected_len.get() {
+			Ok(Self { buf, no_alpha, width, height })
+		}
+		else if len == 0 { Err(PxsumError::NoData) }
 		else { Err(PxsumError::Decode) }
 	}
 
@@ -229,7 +273,7 @@ impl PxImage {
 		// color drift won't affect the checksum.
 		if ! strict && ! no_alpha {
 			let mut i = Wrapping(0_u32);
-			for chunk in buf.chunks_exact_mut(4) {
+			for chunk in buf.chunks_exact_mut(RGBA_SIZE.get()) {
 				if chunk[3] == 0 {
 					chunk.copy_from_slice(i.0.to_le_bytes().as_slice());
 				}
@@ -332,6 +376,24 @@ mod test {
 				kind,
 				"Wrong type guessed for {path}!",
 			);
+		}
+	}
+
+	#[test]
+	fn t_animation() {
+		// Make sure these all fail.
+		for (path, fmt) in [
+			("skel/assets/flyfuk.gif", PxKind::Gif),
+			("skel/assets/flyfuk.png", PxKind::Png),
+			("skel/assets/flyfuk.webp", PxKind::WebP),
+		] {
+			let Ok(raw) = std::fs::read(path) else {
+				panic!("Unable to open {path}.");
+			};
+			match PxImage::new(&raw, fmt) {
+				Ok(_) => panic!("Animation should fail: {path}"),
+				Err(e) => assert_eq!(e, PxsumError::Animation),
+			}
 		}
 	}
 }

@@ -91,7 +91,7 @@ argyle = "0.10.*"
 blake3 = "=1.5.5"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.9.*"
-fyi_msg = "1.5.*"
+fyi_msg = "1.6.*"
 trimothy = "0.6.*"
 walkdir = "=2.5.*"
 

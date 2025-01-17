@@ -12,12 +12,14 @@ use image::{
 	ImageReader,
 };
 use std::{
+	fs::File,
 	io::Cursor,
 	num::{
 		NonZeroU32,
 		NonZeroUsize,
 		Wrapping,
 	},
+	path::Path,
 };
 
 
@@ -29,7 +31,7 @@ const RGBA_SIZE: NonZeroUsize = NonZeroUsize::new(4).unwrap();
 
 
 
-#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+#[derive(Debug, Clone, Copy, Eq, Ord, PartialEq, PartialOrd)]
 /// # Image Kind.
 ///
 /// This enum collects all of the supported image formats from all of the
@@ -169,6 +171,17 @@ impl PxKind {
 		let mut dec = ImageReader::with_format(Cursor::new(src), fmt);
 		dec.no_limits();
 		dec.decode().map_err(Into::into)
+	}
+
+	/// # Try From File.
+	///
+	/// Read the first few bytes of the file and see what shakes out.
+	pub(super) fn try_from_file<P: AsRef<Path>>(src: P) -> Option<Self> {
+		use std::io::Read;
+		let mut file = File::open(src).ok()?;
+		let mut buf = [0_u8; 16];
+		file.read_exact(&mut buf).ok()?;
+		Self::try_from_magic(buf.as_slice()).ok()
 	}
 
 	/// # Guess Format.
@@ -363,7 +376,7 @@ mod test {
 
 		let mut buf = [0_u8; 16];
 		for (path, kind) in KINDS.iter().copied() {
-			let Ok(mut file) = std::fs::File::open(path) else {
+			let Ok(mut file) = File::open(path) else {
 				panic!("Unable to open {path}.");
 			};
 			buf.fill(0);

@@ -229,7 +229,7 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 
 	#[cold]
 	/// # Print Results Grouped by Checksum.
-	fn print_grouped(only_dupes: bool) -> Result<(), PxsumError> {
+	fn print_grouped(only_dupes: bool, split_by_type: bool) -> Result<(), PxsumError> {
 		use std::io::Write;
 		let mut any = false;
 		let mut buf = [0_u8; 64];
@@ -240,10 +240,35 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 				if ! only_dupes || 1 < v.len() {
 					// Our buffer is the right size; this should never fail.
 					if let Ok(chk) = faster_hex::hex_encode(k.as_slice(), buf.as_mut_slice()) {
-						any = true;
-						let _res = writeln!(&mut lock, "{chk}");
-						for path in v {
-							let _res = writeln!(&mut lock, "  {path}");
+						// Regroup the results by type.
+						if split_by_type && 1 < v.len() {
+							let mut split = BTreeMap::<PxKind, BTreeSet<&str>>::new();
+							for v2 in v {
+								// This shouldn't fail; these paths were
+								// successfully decoded mere moments ago!
+								if let Some(kind) = PxKind::try_from_file(v2) {
+									split.entry(kind).or_default().insert(v2);
+								}
+							}
+
+							// Print the new group(s), if they qualify.
+							for v in split.into_values() {
+								if ! only_dupes || 1 < v.len() {
+									any = true;
+									let _res = writeln!(&mut lock, "{chk}");
+									for path in v {
+										let _res = writeln!(&mut lock, "  {path}");
+									}
+								}
+							}
+						}
+						// Print the group as-is.
+						else {
+							any = true;
+							let _res = writeln!(&mut lock, "{chk}");
+							for path in v {
+								let _res = writeln!(&mut lock, "  {path}");
+							}
 						}
 					}
 				}
@@ -279,7 +304,9 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 
 		// We're all good if we did at least one thing, but if not, emit an
 		// error so we can let the user know.
-		if settings.group_by_checksum() { print_grouped(settings.only_dupes()) }
+		if settings.group_by_checksum() {
+			print_grouped(settings.only_dupes(), settings.split_by_type())
+		}
 		else if ANY.load(SeqCst) { Ok(()) }
 		else { Err(PxsumError::Noop) }
 	})

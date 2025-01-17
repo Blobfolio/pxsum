@@ -60,6 +60,10 @@ long = "--quiet"
 description = "Suppress OK messages in -c/--check mode."
 
 [[package.metadata.bashman.switches]]
+long = "--split-by-type"
+description = "Split -g/--group-by-checksum groupings by image type, and if --only-dupes, omit matches from one-off types."
+
+[[package.metadata.bashman.switches]]
 long = "--strict"
 description = "Include color data from invisible pixels in checksum calculations."
 

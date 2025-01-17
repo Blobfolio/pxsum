@@ -44,6 +44,8 @@ FLAGS:
         --only-dupes      Same as -g/--group-by-checksum, but only checksums
                           with two or more matching images will be printed.
     -q, --quiet           Suppress OK messages in -c/--check mode.
+        --split-by-type   Split -g/--group-by-checksum groupings by image type,
+                          and if --only-dupes, omit matches from one-off types.
         --strict          Include color data from invisible pixels in checksum
                           calculations.
     -V, --version         Print version information and exit.

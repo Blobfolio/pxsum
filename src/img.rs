@@ -279,6 +279,12 @@ impl PxImage {
 	///
 	/// Calculate and return a checksum of the pixel data.
 	pub(super) fn into_checksum(self, strict: bool) -> [u8; 32] {
+		/// # Dimension Data Size.
+		///
+		/// Width and height are hashed along with the pixels; this represents
+		/// the bytes that'll take up.
+		const EXTRA: usize = size_of::<NonZeroU32>() * 2;
+
 		// Destructure.
 		let Self { mut buf, no_alpha, width, height } = self;
 
@@ -294,12 +300,14 @@ impl PxImage {
 			}
 		}
 
-		// Hash the pixel data!
-		let mut hasher = blake3::Hasher::new();
-		hasher.update(width.get().to_le_bytes().as_slice());
-		hasher.update(height.get().to_le_bytes().as_slice());
-		hasher.update(buf.as_slice());
-		let mut chk = <[u8; 32]>::from(hasher.finalize());
+		// The pixels are already stored in an owned buffer; let's just add
+		// the dimensions to that and hash everything in one go. Dimensions
+		// come first, unfortunately, but we can accommodate.
+		buf.extend_from_slice([width.get().to_le_bytes(), height.get().to_le_bytes()].as_flattened());
+		buf.rotate_right(EXTRA);
+
+		// Hash the (width and height and) pixel data!
+		let mut chk = <[u8; 32]>::from(blake3::hash(&buf));
 
 		// Steal one bit from the first byte to serve as a strictness indicator.
 		if strict { chk[0] |= Checksum::STRICT; }

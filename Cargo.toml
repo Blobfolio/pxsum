@@ -92,12 +92,15 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 
 [dependencies]
 argyle = "0.10.*"
-blake3 = "=1.5.5"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.9.*"
 fyi_msg = "1.6.*"
 trimothy = "0.6.*"
 walkdir = "=2.5.*"
+
+[dependencies.blake3]
+version = "=1.6.0"
+default-features = false
 
 [dependencies.faster-hex]
 version = "0.10.*"

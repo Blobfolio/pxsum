@@ -12,12 +12,14 @@ use image::{
 	ImageReader,
 };
 use std::{
+	fs::File,
 	io::Cursor,
 	num::{
 		NonZeroU32,
 		NonZeroUsize,
 		Wrapping,
 	},
+	path::Path,
 };
 
 
@@ -29,7 +31,7 @@ const RGBA_SIZE: NonZeroUsize = NonZeroUsize::new(4).unwrap();
 
 
 
-#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+#[derive(Debug, Clone, Copy, Eq, Ord, PartialEq, PartialOrd)]
 /// # Image Kind.
 ///
 /// This enum collects all of the supported image formats from all of the
@@ -171,6 +173,17 @@ impl PxKind {
 		dec.decode().map_err(Into::into)
 	}
 
+	/// # Try From File.
+	///
+	/// Read the first few bytes of the file and see what shakes out.
+	pub(super) fn try_from_file<P: AsRef<Path>>(src: P) -> Option<Self> {
+		use std::io::Read;
+		let mut file = File::open(src).ok()?;
+		let mut buf = [0_u8; 16];
+		file.read_exact(&mut buf).ok()?;
+		Self::try_from_magic(buf.as_slice()).ok()
+	}
+
 	/// # Guess Format.
 	///
 	/// Look for a known file signature in the first dozen bytes, similar to
@@ -266,6 +279,12 @@ impl PxImage {
 	///
 	/// Calculate and return a checksum of the pixel data.
 	pub(super) fn into_checksum(self, strict: bool) -> [u8; 32] {
+		/// # Dimension Data Size.
+		///
+		/// Width and height are hashed along with the pixels; this represents
+		/// the bytes that'll take up.
+		const EXTRA: usize = size_of::<NonZeroU32>() * 2;
+
 		// Destructure.
 		let Self { mut buf, no_alpha, width, height } = self;
 
@@ -281,12 +300,14 @@ impl PxImage {
 			}
 		}
 
-		// Hash the pixel data!
-		let mut hasher = blake3::Hasher::new();
-		hasher.update(width.get().to_le_bytes().as_slice());
-		hasher.update(height.get().to_le_bytes().as_slice());
-		hasher.update(buf.as_slice());
-		let mut chk = <[u8; 32]>::from(hasher.finalize());
+		// The pixels are already stored in an owned buffer; let's just add
+		// the dimensions to that and hash everything in one go. Dimensions
+		// come first, unfortunately, but we can accommodate.
+		buf.extend_from_slice([width.get().to_le_bytes(), height.get().to_le_bytes()].as_flattened());
+		buf.rotate_right(EXTRA);
+
+		// Hash the (width and height and) pixel data!
+		let mut chk = <[u8; 32]>::from(blake3::hash(&buf));
 
 		// Steal one bit from the first byte to serve as a strictness indicator.
 		if strict { chk[0] |= Checksum::STRICT; }
@@ -363,7 +384,7 @@ mod test {
 
 		let mut buf = [0_u8; 16];
 		for (path, kind) in KINDS.iter().copied() {
-			let Ok(mut file) = std::fs::File::open(path) else {
+			let Ok(mut file) = File::open(path) else {
 				panic!("Unable to open {path}.");
 			};
 			buf.fill(0);

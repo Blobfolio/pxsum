@@ -23,6 +23,7 @@ _basher___pxsum() {
 		opts+=("-q")
 		opts+=("--quiet")
 	fi
+	[[ " ${COMP_LINE} " =~ " --split-by-type " ]] || opts+=("--split-by-type")
 	[[ " ${COMP_LINE} " =~ " --strict " ]] || opts+=("--strict")
 	if [[ ! " ${COMP_LINE} " =~ " -V " ]] && [[ ! " ${COMP_LINE} " =~ " --version " ]]; then
 		opts+=("-V")

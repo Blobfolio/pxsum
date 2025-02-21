@@ -192,21 +192,13 @@ In keeping with `md5sum`, _et al_, pxsum emits different exit codes to indicate 
 
 Debian and Ubuntu users can just grab the pre-built `.deb` package from the [latest release](https://github.com/Blobfolio/pxsum/releases/latest).
 
-This application is written in [Rust](https://www.rust-lang.org/) and can alternatively be built from source using [Cargo](https://github.com/rust-lang/cargo):
+This application is written in [Rust](https://www.rust-lang.org/) and can alternatively be built/installed from source using [Cargo](https://github.com/rust-lang/cargo):
 
 ```bash
-# Clone the source.
-git clone https://github.com/Blobfolio/pxsum.git
-
-# Go to it.
-cd pxsum
-
-# Build as usual.
-cargo build \
-    --bin pxsum \
-    --release
+# See "cargo install --help" for more options.
+cargo install \
+    --git https://github.com/Blobfolio/pxsum.git \
+    --bin pxsum
 ```
 
-Note that some of the image decoders — *\*\*cough\*\* JPEG XL \*\*cough\*\** — come with some extra build dependencies of their own. The specifics will vary by system, but you'll most likely need `gcc`/`g++` (or Clang), Meson, NASM, Ninja, and make/cmake.
-
-While specifically designed for Linux systems, pxsum can probably be built for other 64-bit Unix platforms like Mac too.
+Note that when building from source, you'll need to have `cmake`, `make`, `meson`, `nasm`, and `ninja` installed beforehand or Cargo will pop an error. (If that happens, just install the missing thing and try again.)

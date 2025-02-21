@@ -32,6 +32,7 @@ fn build_cli() {
 		"--no-warnings",
 		"--only-dupes",
 		"-q", "--quiet",
+		"--split-by-type",
 		"--strict",
 		"-V", "--version",
 	]);

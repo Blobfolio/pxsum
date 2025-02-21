@@ -46,6 +46,7 @@ impl Settings {
 				Argument::Key("--no-warnings") => { flags &= ! Self::PRINT_WARNINGS; },
 				Argument::Key("--only-dupes") => { flags |= Self::ONLY_DUPES; },
 				Argument::Key("-q" | "--quiet") => { flags &= ! Self::PRINT_VALID; },
+				Argument::Key("--split-by-type") => { flags |= Self::SPLIT_BY_TYPE; },
 				Argument::Key("--strict") => { flags |= Self::STRICT; },
 				Argument::Key("-V" | "--version") => return Err(PxsumError::PrintVersion),
 
@@ -125,22 +126,26 @@ impl Settings {
 	/// # Only Report (Grouped) Dupes.
 	const ONLY_DUPES: u8 =        0b0000_0110; // Implies GROUP_BY_CHECKSUM.
 
+	/// # Split by Type.
+	const SPLIT_BY_TYPE: u8 =     0b0000_1000;
+
 	/// # Checksum w/ Invisible Pixels.
-	const STRICT: u8 =            0b0000_1000;
+	const STRICT: u8 =            0b0001_0000;
 
 	/// # Print Total Execution Time.
-	const PRINT_TIME: u8 =        0b0001_0000;
+	const PRINT_TIME: u8 =        0b0010_0000;
 
 	/// # Print Verified (OK) Files.
-	const PRINT_VALID: u8 =       0b0010_0000;
+	const PRINT_VALID: u8 =       0b0100_0000;
 
 	/// # Print Read/Decode/Formatting Warnings.
-	const PRINT_WARNINGS: u8 =    0b0100_0000;
+	const PRINT_WARNINGS: u8 =    0b1000_0000;
 
 	get!(
 		"Verification Mode", check, CHECK,
 		"Group by Checksum", group_by_checksum, GROUP_BY_CHECKSUM,
 		"Only Report (Grouped) Duplicates", only_dupes, ONLY_DUPES,
+		"Split by Type (when grouping by checksum)", split_by_type, SPLIT_BY_TYPE,
 		"Strict Checksums", strict, STRICT,
 		"Print Total Execution Time.", print_time, PRINT_TIME,
 		"Print Verified (OK) Files.", print_valid, PRINT_VALID,

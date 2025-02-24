@@ -2,11 +2,13 @@
 # pxsum: Errors.
 */
 
+use fyi_msg::MsgKind;
 use image::error::ImageError;
 use std::{
 	error::Error,
 	fmt,
 	num::NonZeroU64,
+	process::ExitCode,
 };
 
 
@@ -179,13 +181,21 @@ impl From<ImageError> for PxsumError {
 }
 
 impl PxsumError {
+	/// # Msg Kind.
+	pub(super) const fn msg_kind(self) -> MsgKind {
+		if matches!(self, Self::Noop | Self::NoDupes | Self::Failed(_)) {
+			MsgKind::Warning
+		}
+		else { MsgKind::Error }
+	}
+
 	/// # Exit Code.
-	pub(super) const fn exit_code(self) -> i32 {
+	pub(super) fn exit_code(self) -> ExitCode {
 		match self {
-			Self::PrintHelp | Self::PrintVersion => 0,
-			Self::Noop | Self::NoDupes => 2,
-			Self::Failed(_) => 3,
-			_ => 1,
+			Self::PrintHelp | Self::PrintVersion => ExitCode::SUCCESS,
+			Self::Noop | Self::NoDupes => ExitCode::from(2),
+			Self::Failed(_) => ExitCode::from(3),
+			_ => ExitCode::FAILURE,
 		}
 	}
 }

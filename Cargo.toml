@@ -92,7 +92,7 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 
 [dependencies]
 crossbeam-channel = "=0.5.*"
-dactyl = "0.9.*"
+dactyl = "0.10.*"
 fyi_msg = "1.7.*"
 trimothy = "0.6.*"
 walkdir = "=2.5.*"
@@ -132,7 +132,7 @@ features = [ "codec-dav1d" ]
 
 [build-dependencies]
 argyle = "0.11.*"
-dactyl = "0.9.*"
+dactyl = "0.10.*"
 
 [build-dependencies.image]
 version = "0.25.*"

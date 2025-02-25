@@ -104,17 +104,16 @@ mod test {
 		let expected = run_read_reference("skel/loose.chk");
 		let mut out = Vec::new();
 		for src in ["skel/loose.chk", "skel/loose-g.chk"] {
-			if let Ok(lines) = File::open(src).map(|f| BufReader::new(f).lines()) {
-				out.truncate(0);
-				for line in ManifestLines::new(lines.map_while(Result::ok)) {
-					out.push(line);
-				}
-				out.sort_unstable();
-				assert_eq!(out, expected, "Normalized {src} mismatches straight read!");
-			}
-			else {
+			let Ok(lines) = File::open(src).map(|f| BufReader::new(f).lines()) else {
 				panic!("Unable to read {src}.");
+			};
+
+			out.truncate(0);
+			for line in ManifestLines::new(lines.map_while(Result::ok)) {
+				out.push(line);
 			}
+			out.sort_unstable();
+			assert_eq!(out, expected, "Normalized {src} mismatches straight read!");
 		}
 	}
 
@@ -123,17 +122,16 @@ mod test {
 		let expected = run_read_reference("skel/strict.chk");
 		let mut out = Vec::new();
 		for src in ["skel/strict.chk", "skel/strict-g.chk"] {
-			if let Ok(lines) = File::open(src).map(|f| BufReader::new(f).lines()) {
-				out.truncate(0);
-				for line in ManifestLines::new(lines.map_while(Result::ok)) {
-					out.push(line);
-				}
-				out.sort_unstable();
-				assert_eq!(out, expected, "Normalized {src} mismatches straight read!");
-			}
-			else {
+			let Ok(lines) = File::open(src).map(|f| BufReader::new(f).lines()) else {
 				panic!("Unable to read {src}.");
+			};
+
+			out.truncate(0);
+			for line in ManifestLines::new(lines.map_while(Result::ok)) {
+				out.push(line);
 			}
+			out.sort_unstable();
+			assert_eq!(out, expected, "Normalized {src} mismatches straight read!");
 		}
 	}
 }

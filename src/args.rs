@@ -57,9 +57,12 @@ impl Settings {
 					set_threads(&mut threads, s.as_bytes());
 				},
 
-				// Everything else to paths.
-				Argument::Other(s) => { paths.push(OsString::from(s)); },
-				Argument::InvalidUtf8(s) => { paths.push(s); },
+				// Path!
+				Argument::Path(s) => { paths.push(s); },
+
+				// Mistake?
+				Argument::Other(s) => return Err(PxsumError::InvalidCli(s)),
+				Argument::InvalidUtf8(s) => return Err(PxsumError::InvalidCli(s.to_string_lossy().into_owned())),
 				_ => {},
 			}
 		}

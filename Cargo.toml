@@ -91,12 +91,15 @@ label = "<FILE(s)…>"
 description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
-argyle = "0.10.*"
 crossbeam-channel = "=0.5.*"
 dactyl = "0.9.*"
 fyi_msg = "1.7.*"
 trimothy = "0.6.*"
 walkdir = "=2.5.*"
+
+[dependencies.argyle]
+version = "0.11.*"
+features = [ "try_paths" ]
 
 [dependencies.blake3]
 version = "=1.6.0"
@@ -128,7 +131,7 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
-argyle = "0.10.*"
+argyle = "0.11.*"
 dactyl = "0.9.*"
 
 [build-dependencies.image]

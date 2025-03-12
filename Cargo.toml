@@ -93,7 +93,7 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 [dependencies]
 crossbeam-channel = "=0.5.*"
 dactyl = "0.10.*"
-fyi_msg = "1.7.*"
+fyi_msg = "1.8.*"
 trimothy = "0.7.*"
 walkdir = "=2.5.*"
 

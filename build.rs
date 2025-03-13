@@ -2,7 +2,10 @@
 # pxsum: Build Script
 */
 
-use argyle::KeyWordsBuilder;
+use argyle::{
+	FlagsBuilder,
+	KeyWordsBuilder,
+};
 use dactyl::NiceU32;
 use image::ImageFormat;
 use std::{
@@ -19,6 +22,7 @@ pub fn main() {
 
 	build_cli();
 	build_ext();
+	build_flags();
 }
 
 /// # Build CLI Keys.
@@ -120,6 +124,22 @@ const fn check_extension(bytes: &[u8]) -> bool {{
 	std::fs::File::create(out_path("pxsum-ext.rs"))
 		.and_then(|mut f| f.write_all(out.as_bytes()).and_then(|_| f.flush()))
 		.expect("Unable to write file.");
+}
+
+/// # Build Flags.
+fn build_flags() {
+	FlagsBuilder::new("Flags")
+		.private()
+		.with_flag("Check", Some("# Verification Mode."))
+		.with_flag("GroupByChecksum", Some("# Group Output By Checksum."))
+		.with_complex_flag("OnlyDupes", ["GroupByChecksum"], Some("# Only Report (Grouped) Dupes."))
+		.with_flag("SplitByType", Some("# Split By Type."))
+		.with_flag("Strict", Some("# Checksum w/ Invisible Pixels."))
+		.with_flag("PrintTime", Some("# Print Total Runtime."))
+		.with_flag("PrintValid", Some("# Print (OK) Files Too."))
+		.with_flag("PrintWarnings", Some("# Print Read/Decode/Formatting Warnings."))
+		.with_defaults(["PrintValid", "PrintWarnings"])
+		.save(out_path("flags.rs"));
 }
 
 /// # Output Path.

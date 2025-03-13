@@ -66,10 +66,7 @@ use chk::Checksum;
 use crossbeam_channel::Receiver;
 use dactyl::NiceElapsed;
 use error::PxsumError;
-use fyi_msg::{
-	Msg,
-	MsgKind,
-};
+use fyi_msg::Msg;
 use img::{
 	PxImage,
 	PxKind,
@@ -92,6 +89,7 @@ use std::{
 		NonZeroUsize,
 	},
 	path::Path,
+	process::ExitCode,
 	sync::{
 		Mutex,
 		Once,
@@ -121,7 +119,7 @@ static STDIN_USED: Once = Once::new();
 
 
 /// # Main.
-fn main() {
+fn main() -> ExitCode {
 	#[cold]
 	/// # Print Execution Time.
 	fn print_time(from: Instant) {
@@ -138,15 +136,18 @@ fn main() {
 	// The main__() method does all the hard work, but some responses warrant
 	// additional output.
 	match main__(&mut bench) {
-		Ok(()) => if bench { print_time(now); },
-		Err(e @ (PxsumError::PrintHelp | PxsumError::PrintVersion)) => { println!("{e}"); },
+		Ok(()) => {
+			if bench { print_time(now); }
+			ExitCode::SUCCESS
+		},
+		Err(e @ (PxsumError::PrintHelp | PxsumError::PrintVersion)) => {
+			println!("{e}");
+			ExitCode::SUCCESS
+		},
 		Err(e) => {
 			// Print the message.
 			let code = e.exit_code();
-			Msg::new(
-				if code == 1 { MsgKind::Error } else { MsgKind::Warning },
-				e.to_string(),
-			)
+			Msg::new(e.msg_kind(), e.to_string())
 				.with_newline(true)
 				.eprint();
 
@@ -154,7 +155,7 @@ fn main() {
 			if bench { print_time(now); }
 
 			// Exit appropriately.
-			std::process::exit(code);
+			code
 		},
 	}
 }

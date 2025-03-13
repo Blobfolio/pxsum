@@ -1,9 +1,9 @@
 [package]
 name = "pxsum"
-version = "0.4.0"
+version = "0.4.1"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
-edition = "2021"
+edition = "2024"
 description = "Calculate and verify checksums for decoded image pixel data."
 readme = "README.md"
 publish = false
@@ -91,15 +91,18 @@ label = "<FILE(s)…>"
 description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
-argyle = "0.10.*"
 crossbeam-channel = "=0.5.*"
-dactyl = "0.9.*"
-fyi_msg = "1.6.*"
-trimothy = "0.6.*"
+dactyl = "0.10.*"
+fyi_msg = "1.8.*"
+trimothy = "0.7.*"
 walkdir = "=2.5.*"
 
+[dependencies.argyle]
+version = "0.12.*"
+features = [ "try_paths" ]
+
 [dependencies.blake3]
-version = "=1.6.0"
+version = "=1.6.1"
 default-features = false
 
 [dependencies.faster-hex]
@@ -128,8 +131,8 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
-argyle = "0.10.*"
-dactyl = "0.9.*"
+argyle = "0.12.*"
+dactyl = "0.10.*"
 
 [build-dependencies.image]
 version = "0.25.*"

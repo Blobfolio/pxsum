@@ -2,11 +2,13 @@
 # pxsum: Errors.
 */
 
+use fyi_msg::MsgKind;
 use image::error::ImageError;
 use std::{
 	error::Error,
 	fmt,
 	num::NonZeroU64,
+	process::ExitCode,
 };
 
 
@@ -79,7 +81,7 @@ EXIT CODES:
 
 
 
-#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 /// # Error Type.
 ///
 /// Depending on the context, this enum can be used to indicate a show-stopping
@@ -100,6 +102,11 @@ pub(super) enum PxsumError {
 	/// This would trigger in the event a `tx.send()` request fails, but that
 	/// shouldn't happen in practice.
 	JobServer,
+
+	/// # Invalid CLI Argument.
+	///
+	/// Something that doesn't seem to be a key or path.
+	InvalidCli(String),
 
 	/// # Malformed verification line.
 	LineDecode,
@@ -152,6 +159,10 @@ impl fmt::Display for PxsumError {
 				"{n} computed checksum{} did NOT match",
 				if n.get() ==1 { "" } else { "s" }
 			),
+			Self::InvalidCli(s) => return write!(
+				f,
+				"Invalid/unknown argument: {s}",
+			),
 			Self::Animation => "Image contains animation.",
 			Self::Decode => "Decoding failed.",
 			Self::Dimensions => "Invalid image dimensions.",
@@ -179,13 +190,21 @@ impl From<ImageError> for PxsumError {
 }
 
 impl PxsumError {
+	/// # Msg Kind.
+	pub(super) const fn msg_kind(&self) -> MsgKind {
+		if matches!(self, Self::Noop | Self::NoDupes | Self::Failed(_)) {
+			MsgKind::Warning
+		}
+		else { MsgKind::Error }
+	}
+
 	/// # Exit Code.
-	pub(super) const fn exit_code(self) -> i32 {
+	pub(super) fn exit_code(&self) -> ExitCode {
 		match self {
-			Self::PrintHelp | Self::PrintVersion => 0,
-			Self::Noop | Self::NoDupes => 2,
-			Self::Failed(_) => 3,
-			_ => 1,
+			Self::PrintHelp | Self::PrintVersion => ExitCode::SUCCESS,
+			Self::Noop | Self::NoDupes => ExitCode::from(2),
+			Self::Failed(_) => ExitCode::from(3),
+			_ => ExitCode::FAILURE,
 		}
 	}
 }

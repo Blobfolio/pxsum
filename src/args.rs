@@ -44,15 +44,15 @@ impl Settings {
 		let mut paths: Vec<OsString> = Vec::new();
 		for arg in args {
 			match arg {
-				Argument::Key("--bench") => { flags |= Flags::PrintTime; },
-				Argument::Key("-c" | "--check") => { flags |= Flags::Check; },
-				Argument::Key("-g" | "--group-by-checksum") => { flags |= Flags::GroupByChecksum; },
+				Argument::Key("--bench") => { flags.set(Flags::PrintTime); },
+				Argument::Key("-c" | "--check") => { flags.set(Flags::Check); },
+				Argument::Key("-g" | "--group-by-checksum") => { flags.set(Flags::GroupByChecksum); },
 				Argument::Key("-h" | "--help") => return Err(PxsumError::PrintHelp),
-				Argument::Key("--no-warnings") => { flags = flags.without(Flags::PrintWarnings); },
-				Argument::Key("--only-dupes") => { flags |= Flags::OnlyDupes; },
-				Argument::Key("-q" | "--quiet") => { flags = flags.without(Flags::PrintValid); },
-				Argument::Key("--split-by-type") => { flags |= Flags::SplitByType; },
-				Argument::Key("--strict") => { flags |= Flags::Strict; },
+				Argument::Key("--no-warnings") => { flags.unset(Flags::PrintWarnings); },
+				Argument::Key("--only-dupes") => { flags.set(Flags::OnlyDupes); },
+				Argument::Key("-q" | "--quiet") => { flags.unset(Flags::PrintValid); },
+				Argument::Key("--split-by-type") => { flags.set(Flags::SplitByType); },
+				Argument::Key("--strict") => { flags.set(Flags::Strict); },
 				Argument::Key("-V" | "--version") => return Err(PxsumError::PrintVersion),
 
 				Argument::KeyWithValue("-d" | "--dir", s) => {

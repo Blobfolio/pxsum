@@ -66,6 +66,7 @@ use chk::Checksum;
 use crossbeam_channel::Receiver;
 use dactyl::NiceElapsed;
 use error::PxsumError;
+use fyi_ansi::dim;
 use fyi_msg::Msg;
 use img::{
 	PxImage,
@@ -221,7 +222,8 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 					let mut src = Cow::Borrowed(chk.src());
 					if src.is_empty() { src = p.to_string_lossy(); }
 					Msg::warning(format!(
-						"Image could not be decoded.\n         \x1b[2m{src}\x1b[0m",
+						concat!("Image could not be decoded.\n         ", dim!("{}")),
+						src,
 					)).eprint();
 				},
 			}
@@ -360,7 +362,8 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 				},
 				Err(PxsumError::LineDecode | PxsumError::Path) => if print_warnings {
 					Msg::warning(format!(
-						"Malformed pxsum/path line.\n         \x1b[2m{line}\x1b[0m"
+						concat!("Malformed pxsum/path line.\n         ", dim!("{}")),
+						line,
 					)).eprint();
 				},
 				Err(e) => {
@@ -408,7 +411,7 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 				if ! read {
 					// TODO: replace with p.display() when stable
 					Msg::warning(format!(
-						"Invalid pxsum manifest.\n         \x1b[2m{}\x1b[0m",
+						concat!("Invalid pxsum manifest.\n         ", dim!("{}")),
 						p.to_string_lossy(),
 					)).eprint();
 				}

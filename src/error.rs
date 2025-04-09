@@ -2,6 +2,10 @@
 # pxsum: Errors.
 */
 
+use fyi_ansi::{
+	ansi,
+	csi,
+};
 use fyi_msg::MsgKind;
 use image::error::ImageError;
 use std::{
@@ -24,7 +28,7 @@ const HELP: &str = concat!(r"
  \  _T_/-._( (
  /         `. \
 |         _  \ |
- \ \ ,  /      |   ", "\x1b[38;5;199mpxsum\x1b[0;38;5;69m v", env!("CARGO_PKG_VERSION"), "\x1b[0m", r#"
+ \ \ ,  /      |   ", csi!(199), "pxsum", ansi!((cornflower_blue) " v", env!("CARGO_PKG_VERSION")), r#"
   || |-_\__   /    Checksum decoded
  ((_/`(____,-'     image pixel data.
 

@@ -195,7 +195,7 @@ impl PxKind {
 			Some([0x89, b'P', b'N', b'G', 0x0d, 0x0a, 0x1a, 0x0a, ..]) => Ok(Self::Png),
 			Some([b'G', b'I', b'F', b'8', b'7' | b'9', b'a', ..]) => Ok(Self::Gif),
 			Some([b'R', b'I', b'F', b'F', _, _, _, _, b'W', b'E', b'B', b'P']) => Ok(Self::WebP),
-			Some([0x00, 0x00, 0x00, 0x20 | 0x1c, b'f', b't', b'y', b'p', b'a', b'v', b'i', b'f']) => Ok(Self::Avif),
+			Some([_, _, _, _, b'f', b't', b'y', b'p', b'a', b'v', b'i', b'f']) => Ok(Self::Avif),
 			Some([0xff, 0x0a, ..] | [0x00, 0x00, 0x00, 0x0c, b'J', b'X', b'L', 0x20, 0x0d, 0x0a, 0x87, 0x0a]) => Ok(Self::JpegXl),
 			Some([b'B', b'M', ..]) => Ok(Self::Bmp),
 			Some([0x00, 0x00, 0x01, 0x00, ..]) => Ok(Self::Ico),
@@ -333,6 +333,7 @@ mod test {
 		("skel/assets/atom.png", Some(PxKind::Png)),
 		("skel/assets/carl.jpg", Some(PxKind::Jpeg)),
 		("skel/assets/cmyk.JPG", Some(PxKind::Jpeg)),
+		("skel/assets/coolbear.avif", Some(PxKind::Avif)),
 		("skel/assets/dingo.png", Some(PxKind::Png)),
 		("skel/assets/down_arrow.gif", Some(PxKind::Gif)),
 		("skel/assets/empty.jpg", None),                 // Empty file.

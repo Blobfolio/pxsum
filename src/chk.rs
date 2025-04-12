@@ -104,9 +104,8 @@ impl Checksum {
 	/// # Return Checksum.
 	pub(super) const fn chk(&self) -> [u8; 32] { self.chk }
 
-	#[expect(clippy::missing_const_for_fn, reason = "False positive.")]
 	/// # Return Source Path.
-	pub(super) fn src(&self) -> &str { &self.src }
+	pub(super) fn src(&self) -> &str { self.src.as_str() }
 
 	/// # Verify a Checksum.
 	///

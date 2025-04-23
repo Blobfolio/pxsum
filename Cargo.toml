@@ -103,7 +103,7 @@ version = "0.12.*"
 features = [ "try_paths" ]
 
 [dependencies.blake3]
-version = "=1.8.1"
+version = "=1.8.*"
 default-features = false
 
 [dependencies.faster-hex]

@@ -105,7 +105,7 @@ impl Checksum {
 	pub(super) const fn chk(&self) -> [u8; 32] { self.chk }
 
 	/// # Return Source Path.
-	pub(super) fn src(&self) -> &str { self.src.as_str() }
+	pub(super) const fn src(&self) -> &str { self.src.as_str() }
 
 	/// # Verify a Checksum.
 	///

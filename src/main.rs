@@ -409,10 +409,9 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 
 				// Well that didn't work!
 				if ! read {
-					// TODO: replace with p.display() when stable
 					Msg::warning(format!(
 						concat!("Invalid pxsum manifest.\n         ", dim!("{}")),
-						p.to_string_lossy(),
+						p.display(),
 					)).eprint();
 				}
 			}

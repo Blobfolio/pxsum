@@ -95,7 +95,7 @@ crossbeam-channel = "=0.5.*"
 dactyl = "0.12.*"
 fyi_ansi = "2.1.*"
 fyi_msg = "2.1.*"
-trimothy = "0.7.*"
+trimothy = "0.8.*"
 walkdir = "=2.5.*"
 
 [dependencies.argyle]

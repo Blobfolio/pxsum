@@ -66,8 +66,10 @@ use chk::Checksum;
 use crossbeam_channel::Receiver;
 use dactyl::NiceElapsed;
 use error::PxsumError;
-use fyi_ansi::dim;
-use fyi_msg::Msg;
+use fyi_msg::{
+	fyi_ansi::dim,
+	Msg,
+};
 use img::{
 	PxImage,
 	PxKind,

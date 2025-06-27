@@ -6,7 +6,10 @@ use argyle::{
 	FlagsBuilder,
 	KeyWordsBuilder,
 };
-use dactyl::NiceU32;
+use dactyl::{
+	NiceSeparator,
+	NiceU32,
+};
 use image::ImageFormat;
 use std::{
 	collections::BTreeSet,
@@ -112,11 +115,11 @@ const fn check_extension(bytes: &[u8]) -> bool {{
 	else {{ false }}
 }}",
 		ext3.into_iter()
-			.map(|n| NiceU32::with_separator(n, b'_'))
+			.map(|n| NiceU32::with_separator(n, NiceSeparator::Underscore))
 			.collect::<Vec<_>>()
 			.join(" | "),
 		ext4.into_iter()
-			.map(|n| NiceU32::with_separator(n, b'_'))
+			.map(|n| NiceU32::with_separator(n, NiceSeparator::Underscore))
 			.collect::<Vec<_>>()
 			.join(" | "),
 	);

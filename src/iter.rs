@@ -49,13 +49,11 @@ impl<I: Iterator<Item=String>> Iterator for ManifestLines<I> {
 			}
 
 			// Grouped: new path.
-			if line.starts_with("  ") {
-				if let Some(chk) = self.buf.as_deref() {
-					// Prepend the stored checksum to the path to make it a
-					// proper line, then return it.
-					line.insert_str(0, chk);
-					return Some(line);
-				}
+			if line.starts_with("  ") && let Some(chk) = self.buf.as_deref() {
+				// Prepend the stored checksum to the path to make it a
+				// proper line, then return it.
+				line.insert_str(0, chk);
+				return Some(line);
 			}
 
 			self.buf = None;

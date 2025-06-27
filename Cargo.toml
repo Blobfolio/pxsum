@@ -94,7 +94,7 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 crossbeam-channel = "=0.5.*"
 dactyl = "0.12.*"
 fyi_msg = "2.2.*"
-trimothy = "0.8.*"
+trimothy = "0.9.*"
 walkdir = "=2.5.*"
 
 [dependencies.argyle]

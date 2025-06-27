@@ -317,23 +317,32 @@ mod test {
 	fn t_pixels() {
 		use image::Pixel;
 
-		// Any image will do.
-		let img = image::open("skel/assets/carl.jpg")
-			.expect("Failed to open carl.jpg")
-			.into_rgba8();
+		/// # Test One.
+		fn test_one(src: &str) {
+			// Any image will do.
+			let Ok(img) = image::open(src) else {
+				panic!("Failed to open {src}");
+			};
+			let img = img.into_rgba8();
 
-		// Collected via iterator.
-		let manual: Vec<u8> = img.pixels()
-			.map(|p| p.channels())
-			.flatten()
-			.copied()
-			.collect::<Vec<u8>>();
+			// Collected via iterator.
+			let manual: Vec<u8> = img.pixels()
+				.map(|p| p.channels())
+				.flatten()
+				.copied()
+				.collect::<Vec<u8>>();
 
-		// Stolen.
-		let automatic = img.into_vec();
+			// Stolen.
+			let automatic = img.into_vec();
 
-		// They should match!
-		assert_eq!(manual, automatic);
+			// They should match!
+			assert_eq!(manual, automatic, "Mismatch for {src}");
+		}
+
+		test_one("skel/assets/ash.jpg");
+		test_one("skel/assets/carl.jpg");
+		test_one("skel/assets/down_arrow.gif");
+		test_one("skel/assets/poe.png");
 	}
 
 	#[test]

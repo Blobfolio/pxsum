@@ -1,7 +1,9 @@
-0af689c28f39dc102e7d58332264986acc34f8ac00dfdd4cb9c86d60ffb2b32e
+0e4bec7669aaa6d757b3b4a26662d9abfdf3e58492a1a87e0e17d0d444363235
   ./assets/herring.png
 0eef0c9852c7ae351c624c59876b306e6613b5bf08c57d65f06559a6f6b480ef
   ./assets/waldorf.png
+12f16fd46f7e26ac4771b0460ad05c52d0ad6d683c0e9acf8debd375930ccbec
+  ./assets/cmyk.JPG
 2cea0e93a982f5e08155aabd1468188d26db09f1f1f7944842f14fe5b3b87ccc
   ./assets/santo.bmp
   ./assets/santo.ico
@@ -9,22 +11,20 @@
 32b35a67f5ebe119954d04e21d6ca8fe59a29dbafe70c38fee4d66580fd17d87
   ./assets/statler.png
   ./assets/statler.webp
-3a9310d9386aa772f5b0580397a1098f2229608b75ae07d51faae82a88e3fcc0
-  ./assets/lenna.jpeg
 5ec921b3d970cfb945e521ce7cd212297b383ce6702de8f103f6b58b3297f53b
   ./assets/firefox-compressed.png
   ./assets/firefox.png
   ./assets/firefox.webp
-686be0f491094213c03bf707f7fcd7a4d63d52a7c22b4681ad6283c4d9501c07
-  ./assets/cmyk.JPG
+762ef9c7e26c244deed3c6aba135bc9244fb72c9979cd67f6f0e07fe84ff1d96
+  ./assets/carl.jpg
 8019abdafbe1569707b737e7cc1fbce42f1c0437558530008e322f1ec87734d7
   ./assets/blue-2x2.png
 80278d0ee1f3034a91afaff318b51ed519b59762a1a716eaa6b20526bd7638f5
   ./assets/ash.jpg
-8a843e9040f2c1204bde41d4637c06712fc1d82eb7395cde88879e62b1169381
-  ./assets/frolics.TIF
 82f83e0346bf4c54a12bb09b8ce772e02c308346e78441496c19bf4bc6ebde23
   ./assets/blue-4x1.png
+8a843e9040f2c1204bde41d4637c06712fc1d82eb7395cde88879e62b1169381
+  ./assets/frolics.TIF
 9072d2d6fe159f09af577c1267393a9b2d26aa05a29316360c284d79d2c4f1d1
   ./assets/dingo.png
 96a93e2a7a53cdb1e529c82accf548d50983194c9a135a36a41a6a6a691a7915
@@ -40,5 +40,5 @@ a6a36520b473a998e995da6085c9ddebfdb1a780d0e187fac880996ef78e4e10
   ./assets/poe.png
 c2ef98aef1f18f50acd2b08efcd72ee49b049fb6c18d5cf418023579b4775e0a
   ./assets/coolbear.avif
-cc8a755c15807e2ae4047e27aa2a61eecf04973df73ea7d17a0ef1dec76d262f
-  ./assets/carl.jpg
+d0b9ecd3cae23b0ad4462698c2022b02f92302f23ad4dcc94e5e55012d16c06f
+  ./assets/lenna.jpeg

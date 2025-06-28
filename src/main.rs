@@ -66,8 +66,10 @@ use chk::Checksum;
 use crossbeam_channel::Receiver;
 use dactyl::NiceElapsed;
 use error::PxsumError;
-use fyi_ansi::dim;
-use fyi_msg::Msg;
+use fyi_msg::{
+	fyi_ansi::dim,
+	Msg,
+};
 use img::{
 	PxImage,
 	PxKind,
@@ -240,38 +242,39 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 		{
 			let mut lock = std::io::stdout().lock();
 			for (k, v) in GROUPED.lock().map_err(|_| PxsumError::JobServer)?.iter() {
-				if ! only_dupes || 1 < v.len() {
+				if
+					(! only_dupes || 1 < v.len()) &&
 					// Our buffer is the right size; this should never fail.
-					if let Ok(chk) = faster_hex::hex_encode(k.as_slice(), buf.as_mut_slice()) {
-						// Regroup the results by type.
-						if split_by_type && 1 < v.len() {
-							let mut split = BTreeMap::<PxKind, BTreeSet<&str>>::new();
-							for v2 in v {
-								// This shouldn't fail; these paths were
-								// successfully decoded mere moments ago!
-								if let Some(kind) = PxKind::try_from_file(v2) {
-									split.entry(kind).or_default().insert(v2);
-								}
+					let Ok(chk) = faster_hex::hex_encode(k.as_slice(), buf.as_mut_slice())
+				{
+					// Regroup the results by type.
+					if split_by_type && 1 < v.len() {
+						let mut split = BTreeMap::<PxKind, BTreeSet<&str>>::new();
+						for v2 in v {
+							// This shouldn't fail; these paths were
+							// successfully decoded mere moments ago!
+							if let Some(kind) = PxKind::try_from_file(v2) {
+								split.entry(kind).or_default().insert(v2);
 							}
+						}
 
-							// Print the new group(s), if they qualify.
-							for v in split.into_values() {
-								if ! only_dupes || 1 < v.len() {
-									any = true;
-									let _res = writeln!(&mut lock, "{chk}");
-									for path in v {
-										let _res = writeln!(&mut lock, "  {path}");
-									}
+						// Print the new group(s), if they qualify.
+						for v in split.into_values() {
+							if ! only_dupes || 1 < v.len() {
+								any = true;
+								let _res = writeln!(&mut lock, "{chk}");
+								for path in v {
+									let _res = writeln!(&mut lock, "  {path}");
 								}
 							}
 						}
-						// Print the group as-is.
-						else {
-							any = true;
-							let _res = writeln!(&mut lock, "{chk}");
-							for path in v {
-								let _res = writeln!(&mut lock, "  {path}");
-							}
+					}
+					// Print the group as-is.
+					else {
+						any = true;
+						let _res = writeln!(&mut lock, "{chk}");
+						for path in v {
+							let _res = writeln!(&mut lock, "  {path}");
 						}
 					}
 				}

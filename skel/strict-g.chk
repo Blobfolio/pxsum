@@ -1,5 +1,7 @@
-0bf689c28f39dc102e7d58332264986acc34f8ac00dfdd4cb9c86d60ffb2b32e
+0f4bec7669aaa6d757b3b4a26662d9abfdf3e58492a1a87e0e17d0d444363235
   ./assets/herring.png
+13f16fd46f7e26ac4771b0460ad05c52d0ad6d683c0e9acf8debd375930ccbec
+  ./assets/cmyk.JPG
 1bc87478d6b037c2de02186b2c5c22cd6b789cfe9100bd3bc5a987b363ddf419
   ./assets/firefox.png
 1dc06167939caacd4ff1f35aae4938e0b6b306e65271734efaaf8310f75d1155
@@ -8,12 +10,10 @@
   ./assets/santo.bmp
   ./assets/santo.ico
   ./assets/symto.bmp
-3b9310d9386aa772f5b0580397a1098f2229608b75ae07d51faae82a88e3fcc0
-  ./assets/lenna.jpeg
 53856be2e5f97573f730a2eafc50c6cb23c36fd5673640d8bf3b6fd2ab2e4594
   ./assets/firefox.webp
-696be0f491094213c03bf707f7fcd7a4d63d52a7c22b4681ad6283c4d9501c07
-  ./assets/cmyk.JPG
+772ef9c7e26c244deed3c6aba135bc9244fb72c9979cd67f6f0e07fe84ff1d96
+  ./assets/carl.jpg
 7fd3c6c0ec74b2d44cbc4201c42b1e4bdcd2877f8abe7de477a68cf8d2d3cd04
   ./assets/statler.png
 8119abdafbe1569707b737e7cc1fbce42f1c0437558530008e322f1ec87734d7
@@ -37,8 +37,8 @@ a5fc68ef9c97524c08c21728677c0d60e5fb1dfa053f9ecd57b3e493a4f7571b
   ./assets/atom.png
 a755a845933f68b8e5cd7218be7631bdf47ae4c8573c9e39c8a3e94029106ecf
   ./assets/poe.png
-cd8a755c15807e2ae4047e27aa2a61eecf04973df73ea7d17a0ef1dec76d262f
-  ./assets/carl.jpg
+d1b9ecd3cae23b0ad4462698c2022b02f92302f23ad4dcc94e5e55012d16c06f
+  ./assets/lenna.jpeg
 d9ae6834d48983bd611d7b729330311cba79b9b783c71d5c1bd1a43833934ab3
   ./assets/waldorf.png
 f3de89a1cc59e0397fe9b9bca7530c526741601b1c852e683c4a1648a60aeb1e

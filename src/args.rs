@@ -155,7 +155,5 @@ fn set_threads(threads: &mut NonZeroUsize, wanted: &[u8]) {
 			.and_then(NonZeroUsize::new)
 			.unwrap_or(NonZeroUsize::MIN);
 	}
-	else if let Some(t) = NonZeroUsize::btou(wanted) {
-		if t < *threads { *threads = t; }
-	}
+	else if let Some(t) = NonZeroUsize::btou(wanted) && t < *threads { *threads = t; }
 }

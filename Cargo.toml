@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.4.4"
+version = "0.5.0"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -92,14 +92,13 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 
 [dependencies]
 crossbeam-channel = "=0.5.*"
-dactyl = "0.10.*"
-fyi_ansi = "2.1.*"
-fyi_msg = "2.1.*"
-trimothy = "0.7.*"
+dactyl = "0.13.*"
+fyi_msg = "2.3.*"
+trimothy = "0.9.*"
 walkdir = "=2.5.*"
 
 [dependencies.argyle]
-version = "0.12.*"
+version = "0.13.*"
 features = [ "try_paths" ]
 
 [dependencies.blake3]
@@ -132,8 +131,8 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
-argyle = "0.12.*"
-dactyl = "0.10.*"
+argyle = "0.13.*"
+dactyl = "0.13.*"
 
 [build-dependencies.image]
 version = "0.25.*"

@@ -116,7 +116,7 @@ default-features = false
 features = [ "bmp", "gif", "ico", "jpeg", "png", "tiff", "webp" ]
 
 [dependencies.jpeg2k]
-version = "=0.9.1"
+version = "=0.10.1"
 default-features = false
 features = [ "image", "openjpeg-sys"]
 

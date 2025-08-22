@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.5.0"
+version = "0.6.0"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -116,7 +116,7 @@ default-features = false
 features = [ "bmp", "gif", "ico", "jpeg", "png", "tiff", "webp" ]
 
 [dependencies.jpeg2k]
-version = "=0.9.1"
+version = "=0.10.1"
 default-features = false
 features = [ "image", "openjpeg-sys"]
 

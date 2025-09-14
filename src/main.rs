@@ -237,16 +237,14 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 	fn print_grouped(only_dupes: bool, split_by_type: bool) -> Result<(), PxsumError> {
 		use std::io::Write;
 		let mut any = false;
-		let mut buf = [0_u8; 64];
+		let mut buf = const_hex::Buffer::<32, false>::new();
 
 		{
 			let mut lock = std::io::stdout().lock();
 			for (k, v) in GROUPED.lock().map_err(|_| PxsumError::JobServer)?.iter() {
-				if
-					(! only_dupes || 1 < v.len()) &&
-					// Our buffer is the right size; this should never fail.
-					let Ok(chk) = faster_hex::hex_encode(k.as_slice(), buf.as_mut_slice())
-				{
+				if ! only_dupes || 1 < v.len() {
+					let chk = buf.format(k);
+
 					// Regroup the results by type.
 					if split_by_type && 1 < v.len() {
 						let mut split = BTreeMap::<PxKind, BTreeSet<&str>>::new();

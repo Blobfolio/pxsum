@@ -42,10 +42,7 @@ impl fmt::Display for Checksum {
 		if self.src.is_empty() { Ok(()) }
 		else {
 			// The hex first.
-			let mut buf = [0_u8; 64];
-			let chk = faster_hex::hex_encode(self.chk.as_slice(), buf.as_mut_slice())
-				.map_err(|_| fmt::Error)?;
-			f.write_str(chk)?;
+			f.write_str(const_hex::const_encode::<32, false>(&self.chk).as_str())?;
 
 			// Two spaces.
 			f.write_str("  ")?;
@@ -125,7 +122,7 @@ impl Checksum {
 		b = b.strip_prefix("  ").ok_or(PxsumError::LineDecode)?;
 
 		// De-hex the checksum.
-		faster_hex::hex_decode(a.as_bytes(), self.chk.as_mut_slice())
+		const_hex::decode_to_slice(a.as_bytes(), self.chk.as_mut_slice())
 			.map_err(|_| PxsumError::LineDecode)?;
 
 		// Now basically do the same thing as crunch, but use the result for

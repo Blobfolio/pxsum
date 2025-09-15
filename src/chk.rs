@@ -41,14 +41,12 @@ impl fmt::Display for Checksum {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		if self.src.is_empty() { Ok(()) }
 		else {
-			// The hex first.
-			f.write_str(const_hex::const_encode::<32, false>(&self.chk).as_str())?;
-
-			// Two spaces.
-			f.write_str("  ")?;
-
-			// The path.
-			f.write_str(self.src.as_str())
+			write!(
+				f,
+				"{}  {}",
+				const_hex::display(&self.chk),
+				self.src.as_str(),
+			)
 		}
 	}
 }

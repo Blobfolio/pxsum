@@ -63,7 +63,7 @@ mod iter;
 
 use args::Settings;
 use chk::Checksum;
-use crossbeam_channel::Receiver;
+use flume::Receiver;
 use dactyl::NiceElapsed;
 use error::PxsumError;
 use fyi_msg::{
@@ -291,7 +291,7 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 	let Some(len) = NonZeroUsize::new(paths.len()) else { return Ok(()); };
 	if len < threads { threads = len; }
 
-	let (tx, rx) = crossbeam_channel::bounded::<&Path>(threads.get());
+	let (tx, rx) = flume::bounded::<&Path>(threads.get());
 	thread::scope(#[inline(always)] |s| {
 		// Set up the worker threads, either with or without progress.
 		let mut workers = Vec::with_capacity(threads.get());
@@ -382,7 +382,7 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 	}
 
 	let threads = settings.threads();
-	let (tx, rx) = crossbeam_channel::bounded::<String>(threads.get());
+	let (tx, rx) = flume::bounded::<String>(threads.get());
 	thread::scope(#[inline(always)] |s| {
 		// Set up the worker threads, either with or without progress.
 		let mut workers = Vec::with_capacity(threads.get());

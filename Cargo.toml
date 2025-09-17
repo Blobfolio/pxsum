@@ -91,7 +91,6 @@ label = "<FILE(s)…>"
 description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
-crossbeam-channel = "=0.5.*"
 dactyl = "0.13.*"
 fyi_msg = "2.3.*"
 trimothy = "0.9.*"
@@ -107,6 +106,10 @@ default-features = false
 
 [dependencies.const-hex]
 version = "1.16.*"
+default-features = false
+
+[dependencies.flume]
+version = "0.11.*"
 default-features = false
 
 [dependencies.image]

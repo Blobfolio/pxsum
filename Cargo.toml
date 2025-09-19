@@ -92,7 +92,7 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 
 [dependencies]
 dactyl = "0.13.*"
-fyi_msg = "2.3.*"
+fyi_msg = "2.4.*"
 trimothy = "0.9.*"
 walkdir = "=2.5.*"
 

@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.6.0"
+version = "0.7.0"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -91,9 +91,8 @@ label = "<FILE(s)…>"
 description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
-crossbeam-channel = "=0.5.*"
 dactyl = "0.13.*"
-fyi_msg = "2.3.*"
+fyi_msg = "2.4.*"
 trimothy = "0.9.*"
 walkdir = "=2.5.*"
 
@@ -105,10 +104,13 @@ features = [ "try_paths" ]
 version = "=1.8.*"
 default-features = false
 
-[dependencies.faster-hex]
-version = "0.10.*"
+[dependencies.const-hex]
+version = "1.16.*"
 default-features = false
-features = [ "std" ]
+
+[dependencies.flume]
+version = "0.11.*"
+default-features = false
 
 [dependencies.image]
 version = "0.25.*"

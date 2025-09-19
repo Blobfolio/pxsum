@@ -63,7 +63,7 @@ mod iter;
 
 use args::Settings;
 use chk::Checksum;
-use crossbeam_channel::Receiver;
+use flume::Receiver;
 use dactyl::NiceElapsed;
 use error::PxsumError;
 use fyi_msg::{
@@ -237,16 +237,14 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 	fn print_grouped(only_dupes: bool, split_by_type: bool) -> Result<(), PxsumError> {
 		use std::io::Write;
 		let mut any = false;
-		let mut buf = [0_u8; 64];
+		let mut buf = const_hex::Buffer::<32, false>::new();
 
 		{
 			let mut lock = std::io::stdout().lock();
 			for (k, v) in GROUPED.lock().map_err(|_| PxsumError::JobServer)?.iter() {
-				if
-					(! only_dupes || 1 < v.len()) &&
-					// Our buffer is the right size; this should never fail.
-					let Ok(chk) = faster_hex::hex_encode(k.as_slice(), buf.as_mut_slice())
-				{
+				if ! only_dupes || 1 < v.len() {
+					let chk = buf.format(k);
+
 					// Regroup the results by type.
 					if split_by_type && 1 < v.len() {
 						let mut split = BTreeMap::<PxKind, BTreeSet<&str>>::new();
@@ -293,7 +291,7 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 	let Some(len) = NonZeroUsize::new(paths.len()) else { return Ok(()); };
 	if len < threads { threads = len; }
 
-	let (tx, rx) = crossbeam_channel::bounded::<&Path>(threads.get());
+	let (tx, rx) = flume::bounded::<&Path>(threads.get());
 	thread::scope(#[inline(always)] |s| {
 		// Set up the worker threads, either with or without progress.
 		let mut workers = Vec::with_capacity(threads.get());
@@ -384,7 +382,7 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 	}
 
 	let threads = settings.threads();
-	let (tx, rx) = crossbeam_channel::bounded::<String>(threads.get());
+	let (tx, rx) = flume::bounded::<String>(threads.get());
 	thread::scope(#[inline(always)] |s| {
 		// Set up the worker threads, either with or without progress.
 		let mut workers = Vec::with_capacity(threads.get());

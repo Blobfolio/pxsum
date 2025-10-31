@@ -2,7 +2,6 @@
 # pxsum: Cli Arguments.
 */
 
-use argyle::Argument;
 use crate::PxsumError;
 use dactyl::traits::BytesToUnsigned;
 use std::{
@@ -35,30 +34,46 @@ pub(super) struct Settings {
 impl Settings {
 	/// # From CLI Arguments.
 	pub(super) fn new() -> Result<(Self, Vec<OsString>), PxsumError> {
-		let args = argyle::args()
-			.with_keywords(include!(concat!(env!("OUT_DIR"), "/argyle.rs")));
+		argyle::argue! {
+			Bench           "--bench",
+			Check      "-c" "--check",
+			Group      "-g" "--group-by-checksum",
+			Help       "-h" "--help",
+			NoWarnings      "--no-warnings",
+			OnlyDupes       "--only-dupes",
+			Quiet      "-q" "--quiet",
+			SplitByType     "--split-by-type",
+			Strict          "--strict",
+			Version    "-V" "--version",
+
+			@options
+			Dir        "-d" "--dir",
+			Threads    "-j",
+
+			@catchall-paths Path,
+		}
 
 		let mut flags = Flags::PrintValid | Flags::PrintWarnings;
 		let mut threads = std::thread::available_parallelism().unwrap_or(NonZeroUsize::MIN);
 		let mut dirs: Vec<OsString> = Vec::new();
 		let mut paths: Vec<OsString> = Vec::new();
-		for arg in args {
+		for arg in Argument::args_os() {
 			match arg {
-				Argument::Key("--bench") => { flags.set(Flags::PrintTime); },
-				Argument::Key("-c" | "--check") => { flags.set(Flags::Check); },
-				Argument::Key("-g" | "--group-by-checksum") => { flags.set(Flags::GroupByChecksum); },
-				Argument::Key("-h" | "--help") => return Err(PxsumError::PrintHelp),
-				Argument::Key("--no-warnings") => { flags.unset(Flags::PrintWarnings); },
-				Argument::Key("--only-dupes") => { flags.set(Flags::OnlyDupes); },
-				Argument::Key("-q" | "--quiet") => { flags.unset(Flags::PrintValid); },
-				Argument::Key("--split-by-type") => { flags.set(Flags::SplitByType); },
-				Argument::Key("--strict") => { flags.set(Flags::Strict); },
-				Argument::Key("-V" | "--version") => return Err(PxsumError::PrintVersion),
+				Argument::Bench => { flags.set(Flags::PrintTime); },
+				Argument::Check => { flags.set(Flags::Check); },
+				Argument::Group => { flags.set(Flags::GroupByChecksum); },
+				Argument::Help => return Err(PxsumError::PrintHelp),
+				Argument::NoWarnings => { flags.unset(Flags::PrintWarnings); },
+				Argument::OnlyDupes => { flags.set(Flags::OnlyDupes); },
+				Argument::Quiet => { flags.unset(Flags::PrintValid); },
+				Argument::SplitByType => { flags.set(Flags::SplitByType); },
+				Argument::Strict => { flags.set(Flags::Strict); },
+				Argument::Version => return Err(PxsumError::PrintVersion),
 
-				Argument::KeyWithValue("-d" | "--dir", s) => {
+				Argument::Dir(s) => {
 					dirs.push(OsString::from(s));
 				},
-				Argument::KeyWithValue("-j", s) => {
+				Argument::Threads(s) => {
 					set_threads(&mut threads, s.as_bytes());
 				},
 
@@ -66,9 +81,11 @@ impl Settings {
 				Argument::Path(s) => { paths.push(s); },
 
 				// Mistake?
-				Argument::Other(s) => return Err(PxsumError::InvalidCli(s)),
-				Argument::InvalidUtf8(s) => return Err(PxsumError::InvalidCli(s.to_string_lossy().into_owned())),
-				_ => {},
+				Argument::Other(s) =>
+					// STDIN isn't really a path.
+					if s == "-" { paths.push(OsString::from(s)); }
+					else { return Err(PxsumError::InvalidCli(s)); },
+				Argument::OtherOs(s) => return Err(PxsumError::InvalidCli(s.to_string_lossy().into_owned())),
 			}
 		}
 

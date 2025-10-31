@@ -2,10 +2,7 @@
 # pxsum: Build Script
 */
 
-use argyle::{
-	FlagsBuilder,
-	KeyWordsBuilder,
-};
+use argyle::FlagsBuilder;
 use dactyl::{
 	NiceSeparator,
 	NiceU32,
@@ -19,35 +16,12 @@ use std::{
 
 
 
-/// # Pre-Compute CLI keys and Extensions.
+/// # Pre-Compute Flags and Extensions.
 fn main() {
 	println!("cargo:rerun-if-env-changed=CARGO_PKG_VERSION");
 
-	build_cli();
 	build_ext();
 	build_flags();
-}
-
-/// # Build CLI Keys.
-fn build_cli() {
-	let mut builder = KeyWordsBuilder::default();
-	builder.push_keys([
-		"--bench",
-		"-c", "--check",
-		"-g", "--group-by-checksum",
-		"-h", "--help",
-		"--no-warnings",
-		"--only-dupes",
-		"-q", "--quiet",
-		"--split-by-type",
-		"--strict",
-		"-V", "--version",
-	]);
-	builder.push_keys_with_values([
-		"-d", "--dir",
-		"-j"
-	]);
-	builder.save(out_path("argyle.rs"));
 }
 
 /// # Build Extensions.

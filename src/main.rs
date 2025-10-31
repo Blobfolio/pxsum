@@ -24,6 +24,7 @@
 	clippy::format_push_string,
 	clippy::get_unwrap,
 	clippy::impl_trait_in_params,
+	clippy::implicit_clone,
 	clippy::lossy_float_literal,
 	clippy::missing_assert_message,
 	clippy::missing_docs_in_private_items,
@@ -33,7 +34,6 @@
 	clippy::rest_pat_in_fully_bound_structs,
 	clippy::semicolon_inside_block,
 	clippy::str_to_string,
-	clippy::string_to_string,
 	clippy::todo,
 	clippy::undocumented_unsafe_blocks,
 	clippy::unneeded_field_pattern,
@@ -196,8 +196,9 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 	/// This is used for `-g`/`--group-by-checksum`.
 	static GROUPED: Mutex<BTreeMap<[u8; 32], BTreeSet<String>>> = Mutex::new(BTreeMap::new());
 
+	#[expect(clippy::needless_pass_by_value, reason = "For drop.")]
 	/// # Worker Callback.
-	fn cb(rx: &Receiver::<&Path>, settings: &Settings) {
+	fn cb(rx: Receiver::<&Path>, settings: &Settings) {
 		let mut chk = Checksum::new(settings.strict());
 		let print_warnings = settings.print_warnings();
 		let group_by_checksum = settings.group_by_checksum();
@@ -296,8 +297,10 @@ fn crunch_paths(paths: &[OsString], settings: Settings)
 		// Set up the worker threads, either with or without progress.
 		let mut workers = Vec::with_capacity(threads.get());
 		for _ in 0..threads.get() {
-			workers.push(s.spawn(#[inline(always)] || cb(&rx, &settings)));
+			let rx2 = rx.clone();
+			workers.push(s.spawn(#[inline(always)] || cb(rx2, &settings)));
 		}
+		drop(rx);
 
 		// Broadcast the jobs!
 		for p in paths { tx.send(p.as_ref()).map_err(|_| PxsumError::JobServer)?; }
@@ -346,8 +349,9 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 	/// # Mismatched Path Count.
 	static FAILED: AtomicU64 = AtomicU64::new(0);
 
+	#[expect(clippy::needless_pass_by_value, reason = "For drop.")]
 	/// # Worker Callback.
-	fn cb(rx: &Receiver::<String>, settings: &Settings) {
+	fn cb(rx: Receiver::<String>, settings: &Settings) {
 		let mut chk = Checksum::new(false);
 		let print_valid =   settings.print_valid();
 		let print_warnings = settings.print_warnings();
@@ -387,8 +391,10 @@ fn verify_paths(paths: &[OsString], settings: Settings)
 		// Set up the worker threads, either with or without progress.
 		let mut workers = Vec::with_capacity(threads.get());
 		for _ in 0..threads.get() {
-			workers.push(s.spawn(#[inline(always)] || cb(&rx, &settings)));
+			let rx2 = rx.clone();
+			workers.push(s.spawn(#[inline(always)] || cb(rx2, &settings)));
 		}
+		drop(rx);
 
 		// Broadcast the jobs!
 		for p in paths {

@@ -121,12 +121,30 @@ impl PxKind {
 		///
 		/// Not a popular format, hence cold.
 		fn decode_jpegxl(src: &[u8]) -> Result<DynamicImage, PxsumError> {
-			use jpegxl_rs::image::ToDynamic;
-			jpegxl_rs::decoder_builder()
+			use image::ImageBuffer;
+			use jpegxl_rs::{
+				Endianness,
+				decode::{
+					Metadata,
+					PixelFormat,
+				},
+			};
+
+			// TODO: prefer jpegxl-rs built-in helper for this if/when it stops
+			// overriding our workspace image crate version.
+			let (Metadata { width, height, ..}, pixels) = jpegxl_rs::decoder_builder()
+				// Force a normal-ass output format. Haha.
+				.pixel_format(PixelFormat {
+					num_channels: 4,
+					endianness: Endianness::Big,
+					align: 8,
+				})
 				.build()
-				.and_then(|dec| dec.decode_to_image(src))
-				.ok()
-				.flatten()
+				.and_then(|dec| dec.decode_with::<u8>(src))
+				.map_err(|_| PxsumError::Decode)?;
+
+			ImageBuffer::from_vec(width, height, pixels)
+				.map(DynamicImage::ImageRgba8)
 				.ok_or(PxsumError::Decode)
 		}
 

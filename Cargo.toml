@@ -91,7 +91,7 @@ label = "<FILE(s)…>"
 description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
-argyle = "0.14.*"
+argyle = "0.15.*"
 dactyl = "0.13.*"
 fyi_msg = "2.4.*"
 trimothy = "0.9.*"
@@ -130,7 +130,7 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
-argyle = "0.14.*"
+argyle = "0.15.*"
 dactyl = "0.13.*"
 
 [build-dependencies.image]

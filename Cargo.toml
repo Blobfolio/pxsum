@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.7.2"
+version = "0.7.3"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -91,7 +91,7 @@ label = "<FILE(s)…>"
 description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
-argyle = "0.14.*"
+argyle = "0.15.*"
 dactyl = "0.13.*"
 fyi_msg = "2.4.*"
 trimothy = "0.9.*"
@@ -120,9 +120,9 @@ default-features = false
 features = [ "image", "openjpeg-sys"]
 
 [dependencies.jpegxl-rs]
-version = "=0.11.2"
+version = "=0.12.0"
 default-features = false
-features = [ "image", "vendored" ]
+features = [ "vendored" ]
 
 [dependencies.libavif]
 version = "=0.14.0"
@@ -130,7 +130,7 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
-argyle = "0.14.*"
+argyle = "0.15.*"
 dactyl = "0.13.*"
 
 [build-dependencies.image]

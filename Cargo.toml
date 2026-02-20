@@ -120,7 +120,7 @@ default-features = false
 features = [ "image", "openjpeg-sys"]
 
 [dependencies.jpegxl-rs]
-version = "=0.12.0"
+version = "=0.13.1"
 default-features = false
 features = [ "vendored" ]
 

@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.7.4"
+version = "0.7.5"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -120,9 +120,9 @@ default-features = false
 features = [ "image", "openjpeg-sys"]
 
 [dependencies.jpegxl-rs]
-version = "=0.13.1"
+version = "=0.14.0"
 default-features = false
-features = [ "vendored" ]
+features = [ "image", "vendored" ]
 
 [dependencies.libavif]
 version = "=0.14.0"

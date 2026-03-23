@@ -1,8 +1,8 @@
 # Project Dependencies
     Package:   pxsum
-    Version:   0.7.4
+    Version:   0.7.5
     Target:    x86_64-unknown-linux-gnu
-    Generated: 2026-03-06 05:20:53 UTC
+    Generated: 2026-03-23 03:42:44 UTC
 
 | Package | Version | Author(s) | License |
 | ---- | ---- | ---- | ---- |
@@ -14,12 +14,12 @@
 | [autocfg](https://github.com/cuviper/autocfg) ⚒️ | 1.5.0 | [Josh Stone](mailto:cuviper@gmail.com) | Apache-2.0 OR MIT |
 | [bitflags](https://github.com/bitflags/bitflags) | 2.11.0 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [**blake3**](https://github.com/BLAKE3-team/BLAKE3) | 1.8.3 | [Jack O'Connor](mailto:oconnor663@gmail.com) and Samuel Neves | CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception |
-| [bon](https://github.com/elastio/bon) | 3.9.0 |  | MIT OR Apache-2.0 |
-| [bon-macros](https://github.com/elastio/bon) | 3.9.0 |  | MIT OR Apache-2.0 |
+| [bon](https://github.com/elastio/bon) | 3.9.1 |  | MIT OR Apache-2.0 |
+| [bon-macros](https://github.com/elastio/bon) | 3.9.1 |  | MIT OR Apache-2.0 |
 | [bytemuck](https://github.com/Lokathor/bytemuck) | 1.25.0 | [Lokathor](mailto:zefria@gmail.com) | Zlib OR Apache-2.0 OR MIT |
 | [byteorder](https://github.com/BurntSushi/byteorder) | 1.5.0 | [Andrew Gallant](mailto:jamslam@gmail.com) | Unlicense OR MIT |
 | [byteorder-lite](https://github.com/image-rs/byteorder-lite) | 0.1.0 |  | Unlicense OR MIT |
-| [cc](https://github.com/rust-lang/cc-rs) ⚒️ | 1.2.56 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
+| [cc](https://github.com/rust-lang/cc-rs) ⚒️ | 1.2.57 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [cfg-if](https://github.com/rust-lang/cfg-if) | 1.0.4 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [cmake](https://github.com/rust-lang/cmake-rs) ⚒️ | 0.1.57 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [color_quant](https://github.com/image-rs/color_quant.git) | 1.1.0 | [nwin](mailto:nwin@users.noreply.github.com) | MIT |
@@ -42,20 +42,20 @@
 | [gif](https://github.com/image-rs/image-gif) | 0.14.1 | The image-rs Developers | MIT OR Apache-2.0 |
 | [half](https://github.com/VoidStarKat/half-rs) | 2.7.1 | [Kathryn Long](mailto:squeeself@gmail.com) | MIT OR Apache-2.0 |
 | [ident_case](https://github.com/TedDriggs/ident_case) | 1.0.1 | [Ted Driggs](mailto:ted.driggs@outlook.com) | MIT OR Apache-2.0 |
-| [**image**](https://github.com/image-rs/image) | 0.25.9 | The image-rs Developers | MIT OR Apache-2.0 |
+| [**image**](https://github.com/image-rs/image) | 0.25.10 | The image-rs Developers | MIT OR Apache-2.0 |
 | [image-webp](https://github.com/image-rs/image-webp) | 0.2.4 |  | MIT OR Apache-2.0 |
 | [**jpeg2k**](https://github.com/Neopallium/jpeg2k) | 0.10.1 | [Robert G. Jakabosky](mailto:rjakabosky&#43;neopallium@neoawareness.com) | MIT OR Apache-2.0 |
-| [**jpegxl-rs**](https://github.com/inflation/jpegxl-rs) | 0.13.1+libjxl-0.11.2 |  | GPL-3.0-or-later |
+| [**jpegxl-rs**](https://github.com/inflation/jpegxl-rs) | 0.14.0+libjxl-0.11.2 |  | GPL-3.0-or-later |
 | [jpegxl-src](https://github.com/inflation/jpegxl-rs) ⚒️ | 0.11.4 |  | BSD-3-Clause |
 | [jpegxl-sys](https://github.com/inflation/jpegxl-rs) | 0.12.1+libjxl-0.11.2 |  | GPL-3.0-or-later |
 | [**libavif**](https://github.com/njaard/libavif-rs) | 0.14.0 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
 | [libavif-sys](https://github.com/njaard/libavif-rs) | 0.17.0+libavif.1.0.4 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
-| [libc](https://github.com/rust-lang/libc) | 0.2.182 | The Rust Project Developers | MIT OR Apache-2.0 |
+| [libc](https://github.com/rust-lang/libc) | 0.2.183 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [libdav1d-sys](https://github.com/njaard/libavif-rs) | 0.7.1+libdav1d.1.4.3 | [Charles Samuels](mailto:ks@ks.ax), [Paolo Barbolini](mailto:paolo@paolo565.org), and [Kornel](mailto:kornel@geekhood.net) | BSD-2-Clause |
 | [lock_api](https://github.com/Amanieu/parking_lot) | 0.4.14 | [Amanieu d'Antras](mailto:amanieu@gmail.com) | MIT OR Apache-2.0 |
 | [log](https://github.com/rust-lang/log) | 0.4.29 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [miniz_oxide](https://github.com/Frommi/miniz_oxide/tree/master/miniz_oxide) | 0.8.9 | [Frommi](mailto:daniil.liferenko@gmail.com), [oyvindln](mailto:oyvindln@users.noreply.github.com), and Rich Geldreich richgel99@gmail.com | MIT OR Zlib OR Apache-2.0 |
-| [moxcms](https://github.com/awxkee/moxcms.git) | 0.7.11 | Radzivon Bartoshyk | BSD-3-Clause OR Apache-2.0 |
+| [moxcms](https://github.com/awxkee/moxcms.git) | 0.8.1 | Radzivon Bartoshyk | BSD-3-Clause OR Apache-2.0 |
 | [num-traits](https://github.com/rust-num/num-traits) | 0.2.19 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [openjpeg-sys](https://github.com/Enet4/openjpeg-sys) | 1.0.12 | [Kornel](mailto:kornel@geekhood.net) and [Eduardo Pinho](mailto:enet4mikeenet@gmail.com) | BSD-2-Clause |
 | [pkg-config](https://github.com/rust-lang/pkg-config-rs) ⚒️ | 0.3.32 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
@@ -77,17 +77,15 @@
 | [thiserror](https://github.com/dtolnay/thiserror) | 2.0.18 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
 | [thiserror-impl](https://github.com/dtolnay/thiserror) | 1.0.69 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
 | [thiserror-impl](https://github.com/dtolnay/thiserror) | 2.0.18 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
-| [tiff](https://github.com/image-rs/image-tiff) | 0.10.3 | The image-rs Developers | MIT |
+| [tiff](https://github.com/image-rs/image-tiff) | 0.11.3 | The image-rs Developers | MIT |
 | [**trimothy**](https://github.com/Blobfolio/trimothy) | 0.9.1 | [Josh Stoik](mailto:josh@blobfolio.com) | WTFPL |
 | [unicode-ident](https://github.com/dtolnay/unicode-ident) | 1.0.24 | [David Tolnay](mailto:dtolnay@gmail.com) | (MIT OR Apache-2.0) AND Unicode-3.0 |
 | [**walkdir**](https://github.com/BurntSushi/walkdir) | 2.5.0 | [Andrew Gallant](mailto:jamslam@gmail.com) | Unlicense OR MIT |
 | [weezl](https://github.com/image-rs/weezl) | 0.1.12 | The image-rs Developers | MIT OR Apache-2.0 |
-| [zerocopy](https://github.com/google/zerocopy) | 0.8.40 | [Joshua Liebow-Feeser](mailto:joshlf@google.com) and [Jack Wrenn](mailto:jswrenn@amazon.com) | BSD-2-Clause OR Apache-2.0 OR MIT |
-| [zerocopy-derive](https://github.com/google/zerocopy) | 0.8.40 | [Joshua Liebow-Feeser](mailto:joshlf@google.com) and [Jack Wrenn](mailto:jswrenn@amazon.com) | BSD-2-Clause OR Apache-2.0 OR MIT |
-| zune-core | 0.4.12 |  | MIT OR Apache-2.0 OR Zlib |
+| [zerocopy](https://github.com/google/zerocopy) | 0.8.47 | [Joshua Liebow-Feeser](mailto:joshlf@google.com) and [Jack Wrenn](mailto:jswrenn@amazon.com) | BSD-2-Clause OR Apache-2.0 OR MIT |
+| [zerocopy-derive](https://github.com/google/zerocopy) | 0.8.47 | [Joshua Liebow-Feeser](mailto:joshlf@google.com) and [Jack Wrenn](mailto:jswrenn@amazon.com) | BSD-2-Clause OR Apache-2.0 OR MIT |
 | [zune-core](https://github.com/etemesi254/zune-image) | 0.5.1 |  | MIT OR Apache-2.0 OR Zlib |
-| [zune-jpeg](https://github.com/etemesi254/zune-image/tree/dev/crates/zune-jpeg) | 0.4.21 | [caleb](mailto:etemesicaleb@gmail.com) | MIT OR Apache-2.0 OR Zlib |
-| [zune-jpeg](https://github.com/etemesi254/zune-image/tree/dev/crates/zune-jpeg) | 0.5.12 | [caleb](mailto:etemesicaleb@gmail.com) | MIT OR Apache-2.0 OR Zlib |
+| [zune-jpeg](https://github.com/etemesi254/zune-image/tree/dev/crates/zune-jpeg) | 0.5.14 | [caleb](mailto:etemesicaleb@gmail.com) | MIT OR Apache-2.0 OR Zlib |
 
 ### Legend
 

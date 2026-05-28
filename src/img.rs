@@ -290,7 +290,6 @@ impl PxImage {
 
 		// For loose comparisons, replace invisible pixels with their index so
 		// color drift won't affect the checksum.
-		#[expect(clippy::explicit_counter_loop, reason = "False positive")]
 		if ! strict && ! no_alpha {
 			let mut i = Wrapping(0_u32);
 			for chunk in buf.chunks_exact_mut(RGBA_SIZE.get()) {

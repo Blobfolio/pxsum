@@ -113,7 +113,7 @@ impl Checksum {
 	/// fail if the line cannot be parsed.
 	pub(super) fn verify_existing(&mut self, line: &str) -> Result<bool, PxsumError> {
 		// Clear the current source path early in case the line is corrupt.
-		self.src.truncate(0);
+		self.src.clear();
 
 		// Split the two parts.
 		let (a, mut b) = line.split_at_checked(64).ok_or(PxsumError::LineDecode)?;
@@ -197,7 +197,7 @@ impl Checksum {
 	/// not end with a "normal" component, an error will be returned instead.
 	fn set_path(&mut self, path: &str) -> Result<(), PxsumError> {
 		// First things first, destroy self.
-		self.src.truncate(0);
+		self.src.clear();
 
 		// Special case: STDIN.
 		let path = path.trim();
@@ -226,7 +226,7 @@ impl Checksum {
 
 		// Space shouldn't be a problem…
 		if self.src.try_reserve(path.len()).is_err() {
-			self.src.truncate(0);
+			self.src.clear();
 			return Err(PxsumError::Path);
 		}
 
@@ -237,7 +237,7 @@ impl Checksum {
 
 			// No backslashes or control characters are allowed.
 			if c.is_control() || c == '\\' {
-				self.src.truncate(0);
+				self.src.clear();
 				return Err(PxsumError::Path);
 			}
 
@@ -255,7 +255,7 @@ impl Checksum {
 		// We're good so long as we don't have an impossible parent-of-root
 		// situation.
 		if self.src.starts_with("/../") {
-			self.src.truncate(0);
+			self.src.clear();
 			Err(PxsumError::Path)
 		}
 		else { Ok(()) }

@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.8.0"
+version = "0.8.1"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -10,7 +10,7 @@ publish = false
 
 [package.metadata.deb]
 maintainer = "Josh Stoik <josh@blobfolio.com>"
-copyright = "2025, Blobfolio, LLC <hello@blobfolio.com>"
+copyright = "2026, Blobfolio, LLC <hello@blobfolio.com>"
 license-file = ["./LICENSE", "0"]
 extended-description = ""
 revision = "1"
@@ -120,7 +120,7 @@ default-features = false
 features = [ "image", "openjpeg-sys"]
 
 [dependencies.jpegxl-rs]
-version = "=0.14.0"
+version = "=0.15.0"
 default-features = false
 features = [ "image", "vendored" ]
 

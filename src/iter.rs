@@ -106,7 +106,7 @@ mod test {
 				panic!("Unable to read {src}.");
 			};
 
-			out.truncate(0);
+			out.clear();
 			for line in ManifestLines::new(lines.map_while(Result::ok)) {
 				out.push(line);
 			}
@@ -124,7 +124,7 @@ mod test {
 				panic!("Unable to read {src}.");
 			};
 
-			out.truncate(0);
+			out.clear();
 			for line in ManifestLines::new(lines.map_while(Result::ok)) {
 				out.push(line);
 			}

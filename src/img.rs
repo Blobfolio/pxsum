@@ -292,7 +292,7 @@ impl PxImage {
 		// color drift won't affect the checksum.
 		if ! strict && ! no_alpha {
 			let mut i = Wrapping(0_u32);
-			for chunk in buf.chunks_exact_mut(RGBA_SIZE.get()) {
+			for chunk in buf.as_chunks_mut::<{RGBA_SIZE.get()}>().0 {
 				if chunk[3] == 0 {
 					chunk.copy_from_slice(i.0.to_le_bytes().as_slice());
 				}

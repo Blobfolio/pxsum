@@ -94,7 +94,7 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 argyle = "0.16.*"
 dactyl = "0.14.*"
 fyi_msg = "2.7.*"
-trimothy = "0.9.*"
+trimothy = "0.10.*"
 walkdir = "=2.5.*"
 
 [dependencies.blake3]

@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.8.2"
+version = "0.8.3"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -91,10 +91,10 @@ label = "<FILE(s)…>"
 description = "One or more image file paths to checksum, or if -c/--check, one or more text file paths containing pxsums to verify. With no FILE(S) or -, input is read from STDIN."
 
 [dependencies]
-argyle = "0.15.*"
-dactyl = "0.13.*"
+argyle = "0.16.*"
+dactyl = "0.14.*"
 fyi_msg = "2.7.*"
-trimothy = "0.9.*"
+trimothy = "0.10.*"
 walkdir = "=2.5.*"
 
 [dependencies.blake3]
@@ -130,8 +130,8 @@ default-features = false
 features = [ "codec-dav1d" ]
 
 [build-dependencies]
-argyle = "0.15.*"
-dactyl = "0.13.*"
+argyle = "0.16.*"
+dactyl = "0.14.*"
 
 [build-dependencies.image]
 version = "0.25.*"

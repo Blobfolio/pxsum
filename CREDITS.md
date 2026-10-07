@@ -1,8 +1,8 @@
 # Project Dependencies
     Package:   pxsum
-    Version:   0.8.3
+    Version:   0.8.4
     Target:    x86_64-unknown-linux-gnu
-    Generated: 2026-10-02 04:52:15 UTC
+    Generated: 2026-10-07 20:49:08 UTC
 
 | Package | Version | Author(s) | License |
 | ---- | ---- | ---- | ---- |
@@ -13,12 +13,12 @@
 | [autocfg](https://github.com/cuviper/autocfg) ⚒️ | 1.5.1 | [Josh Stone](mailto:cuviper@gmail.com) | Apache-2.0 OR MIT |
 | [bitflags](https://github.com/bitflags/bitflags) | 2.13.2 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [**blake3**](https://github.com/BLAKE3-team/BLAKE3) | 1.8.7 | [Jack O'Connor](mailto:oconnor663@gmail.com) and Samuel Neves | CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception |
-| [bon](https://github.com/elastio/bon) | 3.10.1 |  | MIT OR Apache-2.0 |
-| [bon-macros](https://github.com/elastio/bon) | 3.10.1 |  | MIT OR Apache-2.0 |
+| [bon](https://github.com/elastio/bon) | 3.10.2 |  | MIT OR Apache-2.0 |
+| [bon-macros](https://github.com/elastio/bon) | 3.10.2 |  | MIT OR Apache-2.0 |
 | [bytemuck](https://github.com/Lokathor/bytemuck) | 1.25.2 | [Lokathor](mailto:zefria@gmail.com) | Zlib OR Apache-2.0 OR MIT |
 | [byteorder](https://github.com/BurntSushi/byteorder) | 1.5.0 | [Andrew Gallant](mailto:jamslam@gmail.com) | Unlicense OR MIT |
 | [byteorder-lite](https://github.com/image-rs/byteorder-lite) | 0.1.0 |  | Unlicense OR MIT |
-| [cc](https://github.com/rust-lang/cc-rs) ⚒️ | 1.5.1 |  | MIT OR Apache-2.0 |
+| [cc](https://github.com/rust-lang/cc-rs) ⚒️ | 1.6.0 |  | MIT OR Apache-2.0 |
 | [cfg-if](https://github.com/rust-lang/cfg-if) | 1.0.5 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [cmake](https://github.com/rust-lang/cmake-rs) ⚒️ | 0.1.58 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [color_quant](https://github.com/image-rs/color_quant.git) | 1.1.0 | [nwin](mailto:nwin@users.noreply.github.com) | MIT |
@@ -44,12 +44,12 @@
 | [**image**](https://github.com/image-rs/image) | 0.25.10 | The image-rs Developers | MIT OR Apache-2.0 |
 | [image-webp](https://github.com/image-rs/image-webp) | 0.2.4 |  | MIT OR Apache-2.0 |
 | [**jpeg2k**](https://github.com/Neopallium/jpeg2k) | 0.10.1 | [Robert G. Jakabosky](mailto:rjakabosky&#43;neopallium@neoawareness.com) | MIT OR Apache-2.0 |
-| [**jpegxl-rs**](https://github.com/inflation/jpegxl-rs) | 0.15.0+libjxl-0.12.0 |  | GPL-3.0-or-later |
+| [**jpegxl-rs**](https://github.com/inflation/jpegxl-rs) | 0.16.0+libjxl-0.12.0 |  | GPL-3.0-or-later |
 | [jpegxl-src](https://github.com/inflation/jpegxl-rs) ⚒️ | 0.12.0 |  | BSD-3-Clause |
 | [jpegxl-sys](https://github.com/inflation/jpegxl-rs) | 0.13.0+libjxl-0.12.0 |  | GPL-3.0-or-later |
 | [**libavif**](https://github.com/njaard/libavif-rs) | 0.14.0 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
 | [libavif-sys](https://github.com/njaard/libavif-rs) | 0.17.0+libavif.1.0.4 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
-| [libc](https://github.com/rust-lang/libc) | 0.2.189 |  | MIT OR Apache-2.0 |
+| [libc](https://github.com/rust-lang/libc) | 0.2.190 |  | MIT OR Apache-2.0 |
 | [libdav1d-sys](https://github.com/njaard/libavif-rs) | 0.7.1+libdav1d.1.4.3 | [Charles Samuels](mailto:ks@ks.ax), [Paolo Barbolini](mailto:paolo@paolo565.org), and [Kornel](mailto:kornel@geekhood.net) | BSD-2-Clause |
 | [lock_api](https://github.com/Amanieu/parking_lot) | 0.4.14 | [Amanieu d'Antras](mailto:amanieu@gmail.com) | MIT OR Apache-2.0 |
 | [log](https://github.com/rust-lang/log) | 0.4.34 | The Rust Project Developers | MIT OR Apache-2.0 |
@@ -82,8 +82,8 @@
 | [unicode-ident](https://github.com/dtolnay/unicode-ident) | 1.0.26 | [David Tolnay](mailto:dtolnay@gmail.com) | (MIT OR Apache-2.0) AND Unicode-3.0 |
 | [**walkdir**](https://github.com/BurntSushi/walkdir) | 2.5.0 | [Andrew Gallant](mailto:jamslam@gmail.com) | Unlicense OR MIT |
 | [weezl](https://github.com/image-rs/weezl) | 0.1.12 | The image-rs Developers | MIT OR Apache-2.0 |
-| [zerocopy](https://github.com/google/zerocopy) | 0.8.59 |  | BSD-2-Clause OR Apache-2.0 OR MIT |
-| [zerocopy-derive](https://github.com/google/zerocopy) | 0.8.59 |  | BSD-2-Clause OR Apache-2.0 OR MIT |
+| [zerocopy](https://github.com/google/zerocopy) | 0.8.61 |  | BSD-2-Clause OR Apache-2.0 OR MIT |
+| [zerocopy-derive](https://github.com/google/zerocopy) | 0.8.61 |  | BSD-2-Clause OR Apache-2.0 OR MIT |
 | [zune-core](https://github.com/etemesi254/zune-image) | 0.5.3 |  | MIT OR Apache-2.0 OR Zlib |
 | [zune-jpeg](https://github.com/etemesi254/zune-image/tree/dev/crates/zune-jpeg) | 0.5.15 | [caleb](mailto:etemesicaleb@gmail.com) | MIT OR Apache-2.0 OR Zlib |
 

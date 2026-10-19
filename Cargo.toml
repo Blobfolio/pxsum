@@ -94,11 +94,12 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 argyle = "0.16.*"
 dactyl = "0.14.*"
 fyi_msg = "2.7.*"
+jxl-image-rs-integration = "0.7.*"
 trimothy = "0.10.*"
-walkdir = "=2.5.*"
+walkdir = "2.5.*"
 
 [dependencies.blake3]
-version = "=1.8.*"
+version = "1.8.*"
 default-features = false
 
 [dependencies.const-hex]
@@ -118,11 +119,6 @@ features = [ "bmp", "gif", "ico", "jpeg", "png", "tiff", "webp" ]
 version = "=0.10.1"
 default-features = false
 features = [ "image", "openjpeg-sys"]
-
-[dependencies.jpegxl-rs]
-version = "=0.16.0"
-default-features = false
-features = [ "image", "vendored" ]
 
 [dependencies.libavif]
 version = "=0.14.0"

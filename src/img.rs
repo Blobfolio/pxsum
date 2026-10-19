@@ -10,6 +10,7 @@ use image::{
 	DynamicImage,
 	ImageFormat,
 	ImageReader,
+	Limits,
 };
 use std::{
 	fs::File,
@@ -121,12 +122,14 @@ impl PxKind {
 		///
 		/// Not a popular format, hence cold.
 		fn decode_jpegxl(src: &[u8]) -> Result<DynamicImage, PxsumError> {
-			use jpegxl_rs::image::ToDynamic;
-			jpegxl_rs::decoder_builder()
-				.build()
-				.and_then(|dec| dec.decode_to_image(src))
-				.ok()
-				.flatten()
+			use image::ImageDecoder;
+			use jxl_image_rs_integration::JxlDecoder;
+
+			JxlDecoder::new(Cursor::new(src)).ok()
+				.and_then(|mut dec| {
+					let _res = dec.set_limits(Limits::no_limits());
+					DynamicImage::from_decoder(dec).ok()
+				})
 				.ok_or(PxsumError::Decode)
 		}
 

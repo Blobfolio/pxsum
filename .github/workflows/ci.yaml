@@ -50,19 +50,41 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y cmake g++ gcc git make meson nasm ninja-build
 
-    - name: Build
+    - name: Build (Debug)
       run: |
         cargo build --target ${{ matrix.target }}
+
+    - name: Build (Release)
+      run: |
         cargo build --release --target ${{ matrix.target }}
 
     - name: Clippy
       run: |
         cargo clippy --release --target ${{ matrix.target }}
 
-    - name: Test
+    - name: Test (Debug)
       run: |
         cargo test --target ${{ matrix.target }}
+
+    - name: Test (Release)
+      run: |
         cargo test --release --target ${{ matrix.target }}
+
+    - name: loose.chk (Release)
+      run: |
+        cd skel && ../target/x86_64-unknown-linux-gnu/release/pxsum -c loose.chk
+
+    - name: loose-g.chk (Release)
+      run: |
+        cd skel && ../target/x86_64-unknown-linux-gnu/release/pxsum -c loose-g.chk
+
+    - name: strict.chk (Release)
+      run: |
+        cd skel && ../target/x86_64-unknown-linux-gnu/release/pxsum -c strict.chk
+
+    - name: strict-g.chk (Release)
+      run: |
+        cd skel && ../target/x86_64-unknown-linux-gnu/release/pxsum -c strict-g.chk
 
     - name: Build (Vendored)
       run: |

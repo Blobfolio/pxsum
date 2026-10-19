@@ -204,3 +204,25 @@ cargo install \
 ```
 
 Note that when building from source, you'll need to have `cmake`, `make`, `meson`, `nasm`, and `ninja` installed beforehand or Cargo will pop an error. (If that happens, just install the missing thing and try again.)
+
+
+### Offline/Vendored Builds
+
+If your build environment lacks networking support, pre-download the `Source code (tar.gz)` and `vendored-sources.tar.zst` assets attached to the [release](https://github.com/Blobfolio/pxsum/releases/latest), then:
+
+```bash
+# Extract the source code.
+tar -xf pxsum-VERSION.tar.gz
+
+# Move into the source root.
+cd pxsum-VERSION
+
+# Extract the vendored sources (into the source root).
+tar -xf ../vendored-sources.tar.zst
+
+# Build! See `cargo build --help` for more options.
+cargo build \
+    --release \
+    --locked \
+    --offline
+```

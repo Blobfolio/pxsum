@@ -59,6 +59,13 @@ Image file paths passed to pxsum must end with extensions associated with these 
 Paths must additionally be valid UTF-8 and may _not_ contain backslashes or weird control characters — like escape, null, line breaks, bell, etc. — or again, they will be silently ignored.
 
 
+### Limitations
+
+The JPEG family of formats were designed for algorithmic flexibility rather than render consistency. Where one decoder sees <strong style="#ff0000">red</strong>, another might see <strong style="#fe0000">nearly-red</strong>.
+
+This doesn't prevent pxsum from hashing and comparing JPEG images, but limits its ability to detect the sameness of lossless copies stored in other formats.
+
+
 
 ## Basic Usage
 

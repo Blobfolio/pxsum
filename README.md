@@ -59,6 +59,13 @@ Image file paths passed to pxsum must end with extensions associated with these 
 Paths must additionally be valid UTF-8 and may _not_ contain backslashes or weird control characters — like escape, null, line breaks, bell, etc. — or again, they will be silently ignored.
 
 
+### Limitations
+
+The JPEG family of formats were designed for algorithmic flexibility rather than render consistency. Where one decoder sees <strong style="#ff0000">red</strong>, another might see <strong style="#fe0000">nearly-red</strong>.
+
+This doesn't prevent pxsum from hashing and comparing JPEG images, but limits its ability to detect the sameness of lossless copies stored in other formats.
+
+
 
 ## Basic Usage
 
@@ -204,3 +211,25 @@ cargo install \
 ```
 
 Note that when building from source, you'll need to have `cmake`, `make`, `meson`, `nasm`, and `ninja` installed beforehand or Cargo will pop an error. (If that happens, just install the missing thing and try again.)
+
+
+### Offline/Vendored Builds
+
+If your build environment lacks networking support, pre-download the `Source code (tar.gz)` and `vendored-sources.tar.zst` assets attached to the [release](https://github.com/Blobfolio/pxsum/releases/latest), then:
+
+```bash
+# Extract the source code.
+tar -xf pxsum-VERSION.tar.gz
+
+# Move into the source root.
+cd pxsum-VERSION
+
+# Extract the vendored sources (into the source root).
+tar -xf ../vendored-sources.tar.zst
+
+# Build! See `cargo build --help` for more options.
+cargo build \
+    --release \
+    --locked \
+    --offline
+```

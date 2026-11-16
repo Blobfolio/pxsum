@@ -1,6 +1,6 @@
 [package]
 name = "pxsum"
-version = "0.9.0"
+version = "0.9.1"
 license = "WTFPL"
 authors = ["Josh Stoik <josh@blobfolio.com>"]
 edition = "2024"
@@ -93,7 +93,7 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 [dependencies]
 argyle = "0.16.*"
 dactyl = "0.14.*"
-fyi_msg = "2.7.*"
+fyi_msg = "2.8.*"
 jxl-image-rs-integration = "0.8.*"
 trimothy = "0.10.*"
 walkdir = "2.5.*"
@@ -116,12 +116,12 @@ default-features = false
 features = [ "bmp", "gif", "ico", "jpeg", "png", "tiff", "webp" ]
 
 [dependencies.jpeg2k]
-version = "=0.10.1"
+version = "=0.11.0"
 default-features = false
-features = [ "image", "openjpeg-sys"]
+features = [ "image" ]
 
 [dependencies.libavif]
-version = "=0.14.0"
+version = "=0.15.0"
 default-features = false
 features = [ "codec-dav1d" ]
 

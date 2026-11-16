@@ -93,7 +93,7 @@ description = "One or more image file paths to checksum, or if -c/--check, one o
 [dependencies]
 argyle = "0.16.*"
 dactyl = "0.14.*"
-fyi_msg = "2.7.*"
+fyi_msg = "2.8.*"
 jxl-image-rs-integration = "0.8.*"
 trimothy = "0.10.*"
 walkdir = "2.5.*"

@@ -1,23 +1,23 @@
 # Project Dependencies
     Package:   pxsum
-    Version:   0.9.0
+    Version:   0.9.1
     Target:    x86_64-unknown-linux-gnu
-    Generated: 2026-11-13 03:20:18 UTC
+    Generated: 2026-11-16 19:54:41 UTC
 
 | Package | Version | Author(s) | License |
 | ---- | ---- | ---- | ---- |
 | [adler2](https://github.com/oyvindln/adler2) | 2.0.1 | [Jonas Schievink](mailto:jonasschievink@gmail.com) and [oyvindln](mailto:oyvindln@users.noreply.github.com) | 0BSD OR MIT OR Apache-2.0 |
-| [anyhow](https://github.com/dtolnay/anyhow) | 1.0.104 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
 | [**argyle**](https://github.com/Blobfolio/argyle) | 0.16.0 | [Josh Stoik](mailto:josh@blobfolio.com) | WTFPL |
 | [array-init](https://github.com/Manishearth/array-init/) | 2.1.0 | [Manish Goregaokar](mailto:manishsmail@gmail.com) and [Michal 'vorner' Vaner](mailto:vorner@vorner.cz) | MIT OR Apache-2.0 |
 | [arrayvec](https://github.com/bluss/arrayvec) | 0.7.8 | bluss | MIT OR Apache-2.0 |
 | [autocfg](https://github.com/cuviper/autocfg) ⚒️ | 1.5.1 | [Josh Stone](mailto:cuviper@gmail.com) | Apache-2.0 OR MIT |
+| [bitflags](https://github.com/bitflags/bitflags) | 1.3.2 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [bitflags](https://github.com/bitflags/bitflags) | 2.13.2 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [**blake3**](https://github.com/BLAKE3-team/BLAKE3) | 1.8.7 | [Jack O'Connor](mailto:oconnor663@gmail.com) and Samuel Neves | CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception |
 | [bytemuck](https://github.com/Lokathor/bytemuck) | 1.25.2 | [Lokathor](mailto:zefria@gmail.com) | Zlib OR Apache-2.0 OR MIT |
 | [byteorder](https://github.com/BurntSushi/byteorder) | 1.5.0 | [Andrew Gallant](mailto:jamslam@gmail.com) | Unlicense OR MIT |
 | [byteorder-lite](https://github.com/image-rs/byteorder-lite) | 0.1.0 |  | Unlicense OR MIT |
-| [cc](https://github.com/rust-lang/cc-rs) ⚒️ | 1.11.1 |  | MIT OR Apache-2.0 |
+| [cc](https://github.com/rust-lang/cc-rs) ⚒️ | 1.11.2 |  | MIT OR Apache-2.0 |
 | [cfg-if](https://github.com/rust-lang/cfg-if) | 1.0.5 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [cmake](https://github.com/rust-lang/cmake-rs) ⚒️ | 0.1.58 | [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [color_quant](https://github.com/image-rs/color_quant.git) | 1.1.0 | [nwin](mailto:nwin@users.noreply.github.com) | MIT |
@@ -32,22 +32,22 @@
 | [find-msvc-tools](https://github.com/rust-lang/cc-rs) ⚒️ | 0.1.15 |  | MIT OR Apache-2.0 |
 | [flate2](https://github.com/rust-lang/flate2-rs) | 1.1.11 | [Alex Crichton](mailto:alex@alexcrichton.com) and [Josh Triplett](mailto:josh@joshtriplett.org) | MIT OR Apache-2.0 |
 | [**flume**](https://github.com/zesterer/flume) | 0.12.0 | [Joshua Barretto](mailto:joshua.s.barretto@gmail.com) | Apache-2.0 OR MIT |
-| [fyi_ansi](https://github.com/Blobfolio/fyi) | 2.7.2 | [Josh Stoik](mailto:josh@blobfolio.com) | WTFPL |
-| [**fyi_msg**](https://github.com/Blobfolio/fyi) | 2.7.2 | [Josh Stoik](mailto:josh@blobfolio.com) | WTFPL |
+| [fyi_ansi](https://github.com/Blobfolio/fyi) | 2.8.0 | [Josh Stoik](mailto:josh@blobfolio.com) | WTFPL |
+| [**fyi_msg**](https://github.com/Blobfolio/fyi) | 2.8.0 | [Josh Stoik](mailto:josh@blobfolio.com) | WTFPL |
 | [gif](https://github.com/image-rs/image-gif) | 0.14.2 | The image-rs Developers | MIT OR Apache-2.0 |
 | [half](https://github.com/VoidStarKat/half-rs) | 2.7.1 | [Kathryn Long](mailto:squeeself@gmail.com) | MIT OR Apache-2.0 |
 | [**image**](https://github.com/image-rs/image) | 0.25.10 | The image-rs Developers | MIT OR Apache-2.0 |
 | [image-webp](https://github.com/image-rs/image-webp) | 0.2.4 |  | MIT OR Apache-2.0 |
-| [**jpeg2k**](https://github.com/Neopallium/jpeg2k) | 0.10.1 | [Robert G. Jakabosky](mailto:rjakabosky&#43;neopallium@neoawareness.com) | MIT OR Apache-2.0 |
+| [**jpeg2k**](https://github.com/Neopallium/jpeg2k) | 0.11.0 | [Robert G. Jakabosky](mailto:rjakabosky&#43;neopallium@neoawareness.com) | MIT OR Apache-2.0 |
 | [jxl](https://github.com/libjxl/jxl-rs) | 0.8.0 | [Luca Versari](mailto:veluca93@gmail.com) | BSD-3-Clause |
 | [**jxl-image-rs-integration**](https://github.com/libjxl/jxl-rs) | 0.8.0 | [Helmut Januschka](mailto:helmut@januschka.com) | BSD-3-Clause |
 | [jxl_macros](https://github.com/libjxl/jxl-rs) | 0.8.0 | [Luca Versari](mailto:veluca93@gmail.com) | BSD-3-Clause |
 | [jxl_simd](https://github.com/libjxl/jxl-rs) | 0.8.0 | [Luca Versari](mailto:veluca93@gmail.com) | BSD-3-Clause |
 | [jxl_transforms](https://github.com/libjxl/jxl-rs) | 0.8.0 | [Luca Versari](mailto:veluca93@gmail.com) | BSD-3-Clause |
-| [**libavif**](https://github.com/njaard/libavif-rs) | 0.14.0 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
-| [libavif-sys](https://github.com/njaard/libavif-rs) | 0.17.0+libavif.1.0.4 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
+| [**libavif**](https://github.com/njaard/libavif-rs) | 0.15.0 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
+| [libavif-sys](https://github.com/njaard/libavif-rs) | 0.18.0+libavif.1.4.2 | [Charles Samuels](mailto:ks@ks.ax) and [Paolo Barbolini](mailto:paolo@paolo565.org) | BSD-2-Clause |
 | [libc](https://github.com/rust-lang/libc) | 0.2.191 |  | MIT OR Apache-2.0 |
-| [libdav1d-sys](https://github.com/njaard/libavif-rs) | 0.7.1+libdav1d.1.4.3 | [Charles Samuels](mailto:ks@ks.ax), [Paolo Barbolini](mailto:paolo@paolo565.org), and [Kornel](mailto:kornel@geekhood.net) | BSD-2-Clause |
+| [libdav1d-sys](https://github.com/njaard/libavif-rs) | 0.8.0+libdav1d.1.5.4 | [Charles Samuels](mailto:ks@ks.ax), [Paolo Barbolini](mailto:paolo@paolo565.org), and [Kornel](mailto:kornel@geekhood.net) | BSD-2-Clause |
 | [lock_api](https://github.com/Amanieu/parking_lot) | 0.4.14 | [Amanieu d'Antras](mailto:amanieu@gmail.com) | MIT OR Apache-2.0 |
 | [log](https://github.com/rust-lang/log) | 0.4.35 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [miniz_oxide](https://github.com/Frommi/miniz_oxide/tree/master/miniz_oxide) | 0.8.9 | [Frommi](mailto:daniil.liferenko@gmail.com), [oyvindln](mailto:oyvindln@users.noreply.github.com), and Rich Geldreich richgel99@gmail.com | MIT OR Zlib OR Apache-2.0 |
@@ -55,7 +55,8 @@
 | [moxcms](https://github.com/awxkee/moxcms.git) | 0.8.1 | Radzivon Bartoshyk | BSD-3-Clause OR Apache-2.0 |
 | [num-derive](https://github.com/rust-num/num-derive) | 0.4.2 | The Rust Project Developers | MIT OR Apache-2.0 |
 | [num-traits](https://github.com/rust-num/num-traits) | 0.2.19 | The Rust Project Developers | MIT OR Apache-2.0 |
-| [openjpeg-sys](https://github.com/Enet4/openjpeg-sys) | 1.0.12 | [Kornel](mailto:kornel@geekhood.net) and [Eduardo Pinho](mailto:enet4mikeenet@gmail.com) | BSD-2-Clause |
+| [openjp2](https://github.com/Neopallium/openjp2) | 0.7.2 | [Robert G. Jakabosky](mailto:rjakabosky&#43;neopallium@neoawareness.com) | BSD-2-Clause |
+| [openjp2-ctypes](https://github.com/Neopallium/openjp2) | 0.7.2 |  | BSD-2-Clause |
 | [png](https://github.com/image-rs/image-png) | 0.18.1 | The image-rs Developers | MIT OR Apache-2.0 |
 | [proc-macro2](https://github.com/dtolnay/proc-macro2) | 1.0.107 | [David Tolnay](mailto:dtolnay@gmail.com) and [Alex Crichton](mailto:alex@alexcrichton.com) | MIT OR Apache-2.0 |
 | [pxfm](https://github.com/awxkee/pxfm) | 0.1.30 | Radzivon Bartoshyk | BSD-3-Clause OR Apache-2.0 |
@@ -65,12 +66,11 @@
 | [scopeguard](https://github.com/bluss/scopeguard) | 1.2.0 | bluss | MIT OR Apache-2.0 |
 | [shlex](https://github.com/comex/rust-shlex) ⚒️ | 2.0.1 | [comex](mailto:comexk@gmail.com), [Fenhl](mailto:fenhl@fenhl.net), [Adrian Taylor](mailto:adetaylor@chromium.org), [Alex Touchet](mailto:alextouchet@outlook.com), [Daniel Parks](mailto:dp&#43;git@oxidized.org), and [Garrett Berg](mailto:googberg@gmail.com) | MIT OR Apache-2.0 |
 | [simd-adler32](https://github.com/mcountryman/simd-adler32) | 0.3.10 | [Marvin Countryman](mailto:me@maar.vin) | MIT |
+| [smallvec](https://github.com/servo/rust-smallvec) | 1.16.5 | The Servo Project Developers | MIT OR Apache-2.0 |
 | [spin](https://github.com/mvdnes/spin-rs.git) | 0.9.9 | [Mathijs van de Nes](mailto:git@mathijs.vd-nes.nl), [John Ericson](mailto:git@johnericson.me), and [Joshua Barretto](mailto:joshua.s.barretto@gmail.com) | MIT |
 | [syn](https://github.com/dtolnay/syn) | 2.0.119 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
 | [syn](https://github.com/dtolnay/syn) | 3.0.10 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
-| [thiserror](https://github.com/dtolnay/thiserror) | 1.0.69 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
 | [thiserror](https://github.com/dtolnay/thiserror) | 2.0.21 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
-| [thiserror-impl](https://github.com/dtolnay/thiserror) | 1.0.69 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
 | [thiserror-impl](https://github.com/dtolnay/thiserror) | 2.0.21 | [David Tolnay](mailto:dtolnay@gmail.com) | MIT OR Apache-2.0 |
 | [tiff](https://github.com/image-rs/image-tiff) | 0.11.3 | The image-rs Developers | MIT |
 | [**trimothy**](https://github.com/Blobfolio/trimothy) | 0.10.0 | [Josh Stoik](mailto:josh@blobfolio.com) | WTFPL |
